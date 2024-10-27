@@ -36,6 +36,11 @@ public class PlayerAnimator : MonoBehaviour
             PlayerColor.Purple => IdlePurple,
             _ => IdleWhite,
         };
+        int LockState(int s, float t)
+        {
+            _lockedTill = Time.time + t;
+            return s;
+        }
     }
     #endregion
 
