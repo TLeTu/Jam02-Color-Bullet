@@ -13,6 +13,8 @@ public class PlayerMovement : MonoBehaviour
     #region DATA
     public float runMaxSpeed = 9.5f;
     public float runAccelAmount = 50f;
+    private Vector3 mousePositon;
+    private Vector2 direction;
     #endregion
 
 
@@ -27,6 +29,26 @@ public class PlayerMovement : MonoBehaviour
         _moveInput.x = Input.GetAxisRaw("Horizontal");
         _moveInput.y = Input.GetAxisRaw("Vertical");
         _moveInput = _moveInput.normalized;
+        mousePositon = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        #endregion
+
+        #region MODEL MOVEMENT
+        direction = (mousePositon - transform.position).normalized;
+        if (direction.x > 0)
+        {
+            transform.localScale = new Vector3(-1, 1, 1);
+            transform.right = direction;
+        }
+        else if (direction.x < 0)
+        {
+            transform.localScale = new Vector3(1, 1, 1);
+            transform.right = -direction;
+        }
+        
+
+        // the character is a square, i want to rotate the left side of the square to face the mouse like transform.up = direction;
+        
+
         #endregion
     }
 
