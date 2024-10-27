@@ -3,7 +3,7 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     #region COMPONENTS
-    public Rigidbody2D RB { get; private set; }
+    public Rigidbody2D _rb { get; private set; }
     #endregion
 
     #region STATE PARAMETERS
@@ -11,16 +11,16 @@ public class PlayerMovement : MonoBehaviour
     #endregion
 
     #region DATA
-    public float runMaxSpeed = 9.5f;
-    public float runAccelAmount = 50f;
-    private Vector3 mousePositon;
-    private Vector2 direction;
+    public float _runMaxSpeed = 9.5f;
+    public float _runAccelAmount = 50f;
+    private Vector3 _mousePositon;
+    private Vector2 _direction;
     #endregion
 
 
     private void Awake()
     {
-        RB = GetComponent<Rigidbody2D>();
+        _rb = GetComponent<Rigidbody2D>();
     }
 
     private void Update()
@@ -29,25 +29,21 @@ public class PlayerMovement : MonoBehaviour
         _moveInput.x = Input.GetAxisRaw("Horizontal");
         _moveInput.y = Input.GetAxisRaw("Vertical");
         _moveInput = _moveInput.normalized;
-        mousePositon = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        _mousePositon = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         #endregion
 
         #region MODEL MOVEMENT
-        direction = (mousePositon - transform.position).normalized;
-        if (direction.x > 0)
+        _direction = (_mousePositon - transform.position).normalized;
+        if (_direction.x > 0)
         {
             transform.localScale = new Vector3(-1, 1, 1);
-            transform.right = direction;
+            transform.right = _direction;
         }
-        else if (direction.x < 0)
+        else if (_direction.x < 0)
         {
             transform.localScale = new Vector3(1, 1, 1);
-            transform.right = -direction;
+            transform.right = -_direction;
         }
-        
-
-        // the character is a square, i want to rotate the left side of the square to face the mouse like transform.up = direction;
-        
 
         #endregion
     }
@@ -60,12 +56,12 @@ public class PlayerMovement : MonoBehaviour
     #region MOVEMENT METHODS
     private void Run()
     {
-        float targetSpeedX = _moveInput.x * runMaxSpeed;
-        float targetSpeedY = _moveInput.y * runMaxSpeed;
+        float targetSpeedX = _moveInput.x * _runMaxSpeed;
+        float targetSpeedY = _moveInput.y * _runMaxSpeed;
 
         Vector2 targetVelocity = new Vector2(targetSpeedX, targetSpeedY);
 
-        RB.linearVelocity = Vector2.Lerp(RB.linearVelocity, targetVelocity, runAccelAmount * Time.fixedDeltaTime);
+        _rb.linearVelocity = Vector2.Lerp(_rb.linearVelocity, targetVelocity, _runAccelAmount * Time.fixedDeltaTime);
     }
 
     #endregion
