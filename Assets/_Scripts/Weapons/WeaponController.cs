@@ -6,7 +6,7 @@ public class WeaponController : MonoBehaviour
 {
     [SerializeField] private List<Weapon> _weapons;
 
-    private int _currentWeaponIndex = 0;
+    [SerializeField] private int _currentWeaponIndex = 0;
 
     public Weapon CurrentWeapon => _weapons[_currentWeaponIndex];
 

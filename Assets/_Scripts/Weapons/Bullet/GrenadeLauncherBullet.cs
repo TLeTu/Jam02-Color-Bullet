@@ -4,10 +4,12 @@ using UnityEngine;
 public class GrenadeLauncherBullet : Bullet
 {
     [SerializeField] private Animator _animator;
-    [SerializeField] private CircleCollider2D _collider;
+    [SerializeField] private GrenadeLauncherBulletDmgDealer _dealer;
 
     [SerializeField] private float _flySpeed = 1;
     [SerializeField] private AnimationCurve _animationCurve;
+
+    [SerializeField] private float _damage;
 
     private Vector2 _startPoint;
     private Vector2 _aimPoint;
@@ -19,7 +21,6 @@ public class GrenadeLauncherBullet : Bullet
     private void Awake()
     {
         _animator = GetComponent<Animator>();
-        _collider = GetComponent<CircleCollider2D>();
     }
 
     private void OnEnable()
@@ -66,8 +67,6 @@ public class GrenadeLauncherBullet : Bullet
 
         Vector2 point = Vector2.Lerp(_startPoint, _aimPoint, _animationCurve.Evaluate(_currentCurve));
 
-        Debug.Log(_currentCurve + ": " + point);
-
         transform.position = (Vector3)point;
 
         if (_currentCurve >= 1)
@@ -81,6 +80,7 @@ public class GrenadeLauncherBullet : Bullet
     private void Explode()
     {
         _animator.SetTrigger("Explode");
+        _dealer.DealOneShotDamage(_damage);
     }
 
 
