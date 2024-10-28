@@ -13,6 +13,7 @@ public class PlayerMovement : MonoBehaviour
     #region DATA
     public float _runMaxSpeed = 9.5f;
     public float _runAccelAmount = 50f;
+    public float _runDeccelAmount = 50f;
     private Vector3 _mousePositon;
     private Vector2 _direction;
     #endregion
@@ -54,14 +55,31 @@ public class PlayerMovement : MonoBehaviour
     }
 
     #region MOVEMENT METHODS
+
     private void Run()
     {
+        #region NO TOUCHING
         float targetSpeedX = _moveInput.x * _runMaxSpeed;
         float targetSpeedY = _moveInput.y * _runMaxSpeed;
 
-        Vector2 targetVelocity = new Vector2(targetSpeedX, targetSpeedY);
+        targetSpeedX = Mathf.Lerp(_rb.linearVelocity.x, targetSpeedX, 1);
+        targetSpeedY = Mathf.Lerp(_rb.linearVelocity.y, targetSpeedY, 1);
 
-        _rb.linearVelocity = Vector2.Lerp(_rb.linearVelocity, targetVelocity, _runAccelAmount * Time.fixedDeltaTime);
+        float accelRateX;
+        float accelRateY;
+
+        accelRateX = (Mathf.Abs(targetSpeedX) > 0.01f) ? _runAccelAmount : _runDeccelAmount;
+        accelRateY = (Mathf.Abs(targetSpeedY) > 0.01f) ? _runAccelAmount : _runDeccelAmount;
+
+        float speedDifX = targetSpeedX - _rb.linearVelocity.x;
+        float speedDifY = targetSpeedY - _rb.linearVelocity.y;
+
+        float movementX = speedDifX * accelRateX;
+        float movementY = speedDifY * accelRateY;
+        #endregion
+
+        _rb.AddForce(new Vector2(movementX, movementY), ForceMode2D.Force);
+
     }
 
     #endregion
