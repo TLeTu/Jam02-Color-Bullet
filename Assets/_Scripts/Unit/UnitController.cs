@@ -32,13 +32,13 @@ public class UnitController : MonoBehaviour
         _forceTimer.Tick(Time.deltaTime);
     }
 
-    private void ResetForce()
+    protected virtual void ResetForce()
     {
         _rb.linearVelocity = Vector2.zero;
         _forceTimer.Stop();
     }
 
-    public void AddForce(float force, Vector2 direction)
+    public virtual void AddForce(float force, Vector2 direction)
     {
         _rb.AddForce(direction * force, ForceMode2D.Impulse);
         _forceTimer.Start();

@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: ad461649fee814a4594b642559cf3a06
+guid: 5f771ed253933704a8f4ba4fd2a7aa25
 TextureImporter:
   internalIDToNameTable:
   - first:
@@ -64,7 +64,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 0
+    filterMode: 1
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -78,7 +78,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 32
+  spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -100,9 +100,9 @@ TextureImporter:
   - serializedVersion: 4
     buildTarget: DefaultTexturePlatform
     maxTextureSize: 2048
-    resizeAlgorithm: 1
+    resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -359,17 +359,7 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable:
-      Red-Bullet-Sheet-export_0: 6832938770662377844
-      Red-Bullet-Sheet-export_1: 6434887819336157251
-      Red-Bullet-Sheet-export_2: -8763476730530904848
-      Red-Bullet-Sheet-export_3: -7824238552354477156
-      Red-Bullet-Sheet-export_4: -765437050493637279
-      Red-Bullet-Sheet-export_5: 9110644491247118299
-      Red-Bullet-Sheet-export_6: 8966752213200581816
-      Red-Bullet-Sheet-export_7: 7327681060074458122
-      Red-Bullet-Sheet-export_8: 8666784144168362151
-      Red-Bullet-Sheet-export_9: -31854842502457998
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

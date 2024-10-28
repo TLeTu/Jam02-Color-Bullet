@@ -8,6 +8,8 @@ public class PlayerMovement : MonoBehaviour
 
     #region STATE PARAMETERS
     private Vector2 _moveInput;
+
+    private bool _lockMovement;
     #endregion
 
     #region DATA
@@ -22,6 +24,11 @@ public class PlayerMovement : MonoBehaviour
     private void Awake()
     {
         _rb = GetComponent<Rigidbody2D>();
+    }
+
+    private void Start()
+    {
+        _lockMovement = false;
     }
 
     private void Update()
@@ -51,8 +58,11 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        Run();
+        if (!_lockMovement) Run();
     }
+
+    public void LockMovement() => _lockMovement = true;
+    public void UnlockMovement() => _lockMovement = false;
 
     #region MOVEMENT METHODS
 

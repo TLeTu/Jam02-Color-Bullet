@@ -5,6 +5,7 @@ public class PlayerController : UnitController
 
     #region COMPONENTS
     [SerializeField] private PlayerAnimator _playerAnimator;
+    [SerializeField] private PlayerMovement _playerMovement;
     [SerializeField] private WeaponController _weaponController;
     #endregion
     #region DATA
@@ -32,6 +33,19 @@ public class PlayerController : UnitController
             _weaponController.FireCurrentWeapon(this);
         }
     }
+
+    public override void AddForce(float force, Vector2 direction)
+    {
+        base.AddForce(force, direction);
+        _playerMovement.LockMovement();
+    }
+
+    protected override void ResetForce()
+    {
+        base.ResetForce();
+        _playerMovement.UnlockMovement();
+    }
+
     #region COLLISION
     private void OnTriggerEnter2D(Collider2D other)
     {

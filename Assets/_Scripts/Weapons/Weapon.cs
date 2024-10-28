@@ -14,7 +14,7 @@ public abstract class Weapon : PoolerBase<Bullet>
 
     protected virtual void Awake()
     {
-        InitPool(_bulletPrefab, _bulletHolder, 10, 100);
+        InitPool(_bulletPrefab, _bulletHolder);
         _fireTimer = new CountdownTimer(1f / _fireRate);
     }
 
