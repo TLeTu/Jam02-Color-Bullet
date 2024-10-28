@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : UnitController
 {
 
     #region COMPONENTS
@@ -10,17 +10,26 @@ public class PlayerController : MonoBehaviour
     #region DATA
     private PlayerColor _playerColor;
     #endregion
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         _playerColor = PlayerColor.White;
     }
-    private void Update()
+
+    protected override void Start()
     {
+        base.Start();
+        InputReader.Instance.ChangeWeaponAction += _weaponController.ChangeNextWeapon;
+    }
+
+    protected override void Update()
+    {
+        base.Update();
         _playerAnimator.Render(_playerColor);
 
         if (InputReader.Instance.IsFiring)
         {
-            _weaponController.FireCurrentWeapon();
+            _weaponController.FireCurrentWeapon(this);
         }
     }
     #region COLLISION

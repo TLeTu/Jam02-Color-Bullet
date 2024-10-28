@@ -81,6 +81,8 @@ public class GrenadeLauncherBullet : Bullet
     {
         _animator.SetTrigger("Explode");
         _dealer.DealOneShotDamage(_damage);
+
+        StartDespawnTimer();
     }
 
 

@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using Utilities;
 
@@ -8,7 +9,12 @@ public class UnitController : MonoBehaviour
 
     private CountdownTimer _forceTimer;
 
-    private void Start()
+    protected virtual void Awake()
+    {
+        _rb = GetComponent<Rigidbody2D>();
+    }
+
+    protected virtual void Start()
     {
         _forceTimer = new CountdownTimer(_forceTime);
         _forceTimer.OnTimerStop += ResetForce;
@@ -16,12 +22,14 @@ public class UnitController : MonoBehaviour
 
     }
 
-    private void Update()
+    protected virtual void Update()
     {
+        if (_rb.linearVelocity != Vector2.zero && !_forceTimer.IsRunning)
+        {
+            _forceTimer.Start();
+        }
+
         _forceTimer.Tick(Time.deltaTime);
-
-        Debug.Log(_rb.linearVelocity);
-
     }
 
     private void ResetForce()

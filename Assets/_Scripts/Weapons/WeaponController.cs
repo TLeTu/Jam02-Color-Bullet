@@ -15,9 +15,9 @@ public class WeaponController : MonoBehaviour
         _weapons = new List<Weapon>(GetComponentsInChildren<Weapon>());
     }
 
-    public void FireCurrentWeapon()
+    public void FireCurrentWeapon(UnitController unit)
     {
-        CurrentWeapon.Fire(InputReader.Instance.AimPoint);
+        CurrentWeapon.Fire(InputReader.Instance.AimPoint, unit);
     }
 
     public void SwitchWeapon(int index)
@@ -29,6 +29,11 @@ public class WeaponController : MonoBehaviour
         }
 
         _currentWeaponIndex = index;
+    }
+
+    public void ChangeNextWeapon()
+    {
+        _currentWeaponIndex = (_currentWeaponIndex + 1) % _weapons.Count;
     }
 
 }

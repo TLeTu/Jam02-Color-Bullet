@@ -1,16 +1,28 @@
 using UnityEngine;
 using UnityEngine.Pool;
+using Utilities;
 
 public abstract class Weapon : PoolerBase<Bullet>
 {
+    [SerializeField] protected float _fireRate = 1f; // 1 bullet per second
+
+
     [SerializeField] private Bullet _bulletPrefab;
     [SerializeField] private GameObject _bulletHolder;
 
+    protected CountdownTimer _fireTimer;
+
     protected virtual void Awake()
     {
-        //Init a new object pool
-        InitPool(_bulletPrefab, _bulletHolder);
+        InitPool(_bulletPrefab, _bulletHolder, 10, 100);
+        _fireTimer = new CountdownTimer(1f / _fireRate);
     }
+
+    protected virtual void Update()
+    {
+        _fireTimer.Tick(Time.deltaTime);
+    }
+
 
     protected Bullet GetBullet()
     {
@@ -30,6 +42,20 @@ public abstract class Weapon : PoolerBase<Bullet>
         obj.Despawn += DespawnBullet;
     }
 
+    protected virtual bool CanFire()
+    {
+        if (!_fireTimer.IsFinished && _fireTimer.IsRunning)
+        {
+            return false;
+        }
+
+        _fireTimer.Reset();
+        _fireTimer.Start();
+
+        return true;
+    }
+
+
     // This method is called when the player presses the fire button
-    public abstract void Fire(Vector2 aimPoint);
+    public abstract void Fire(Vector2 aimPoint, UnitController source = null);
 }

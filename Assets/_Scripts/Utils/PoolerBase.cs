@@ -38,6 +38,7 @@ public abstract class PoolerBase<T> : MonoBehaviour where T : MonoBehaviour
     {
         T obj = Instantiate(_prefab);
         if (_holder != null) obj.transform.SetParent(_holder.transform);
+        obj.gameObject.SetActive(false);
         return obj;
     }
     protected virtual void GetSetup(T obj) => obj.gameObject.SetActive(true);
