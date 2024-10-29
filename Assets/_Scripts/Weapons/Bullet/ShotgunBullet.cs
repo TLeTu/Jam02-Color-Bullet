@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class ShotgunBullet : Bullet
 {
+    [SerializeField] private ShotgunBulletDmgDealer _dealer;
+    [SerializeField] private float _damage;
     [SerializeField] private float offset;
 
     public override void Initialize(Vector2 position)
@@ -17,6 +19,8 @@ public class ShotgunBullet : Bullet
 
         //offset the bullet's position so it doesn't collide with the player
         transform.position += (Vector3)direction * offset;
+
+        _dealer.DealOneShotDamage(_damage);
 
         StartDespawnTimer();
     }

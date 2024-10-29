@@ -4,6 +4,7 @@ using Utilities;
 
 public class UnitController : MonoBehaviour
 {
+    [Header("Unit Setting")]
     [SerializeField] private Rigidbody2D _rb;
     [SerializeField] private float _forceTime;
 
@@ -30,6 +31,10 @@ public class UnitController : MonoBehaviour
         }
 
         _forceTimer.Tick(Time.deltaTime);
+    }
+
+    protected virtual void FixedUpdate()
+    {
     }
 
     protected virtual void ResetForce()

@@ -37,7 +37,6 @@ public abstract class PoolerBase<T> : MonoBehaviour where T : MonoBehaviour
         T obj = Instantiate(_prefab);
         if (_holder != null) obj.transform.SetParent(_holder.transform);
         obj.gameObject.SetActive(false);
-        Debug.Log($"Created: {obj.name}");
         return obj;
     }
     protected virtual void GetSetup(T obj)
@@ -54,7 +53,6 @@ public abstract class PoolerBase<T> : MonoBehaviour where T : MonoBehaviour
 
         if (obj != null)
         {
-            Debug.Log($"Releasing: {obj.name}");
             obj.gameObject.SetActive(false);
             // Optional: You can add any additional cleanup logic here
         }
@@ -63,7 +61,6 @@ public abstract class PoolerBase<T> : MonoBehaviour where T : MonoBehaviour
 
     protected virtual void DestroySetup(T obj)
     {
-        Debug.Log($"Destroying: {obj.name}");
         Destroy(obj);
     }
     #endregion

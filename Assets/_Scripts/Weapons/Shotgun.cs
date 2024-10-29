@@ -17,7 +17,7 @@ public class Shotgun : Weapon
         if (source != null)
         {
             source.OverideForce(_knockbackForce, -direction);
-            Debug.Log(source.name + " Knock " + _knockbackForce + " - " + direction);
+            //Debug.Log(source.name + " Knock " + _knockbackForce + " - " + direction);
         }
 
     }
