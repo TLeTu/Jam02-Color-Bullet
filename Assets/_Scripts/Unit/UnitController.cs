@@ -5,10 +5,12 @@ using Utilities;
 public class UnitController : MonoBehaviour
 {
     [Header("Unit Setting")]
-    [SerializeField] private Rigidbody2D _rb;
+    [SerializeField] protected Rigidbody2D _rb;
     [SerializeField] private float _forceTime;
 
     private CountdownTimer _forceTimer;
+
+    protected bool _lockForce;
 
     protected virtual void Awake()
     {
@@ -20,6 +22,8 @@ public class UnitController : MonoBehaviour
         _forceTimer = new CountdownTimer(_forceTime);
         _forceTimer.OnTimerStop += ResetForce;
         _forceTimer.Stop();
+
+        _lockForce = false;
 
     }
 
@@ -41,7 +45,12 @@ public class UnitController : MonoBehaviour
     {
         _rb.linearVelocity = Vector2.zero;
         _forceTimer.Stop();
+
+        UnlockForce();
     }
+
+    public void LockForce() => _lockForce = true;
+    public void UnlockForce() => _lockForce = false;
 
     public virtual void AddForce(float force, Vector2 direction)
     {
@@ -54,6 +63,8 @@ public class UnitController : MonoBehaviour
     {
         _rb.linearVelocity = Vector2.zero;
         AddForce(force, direction);
+
+        LockForce();
     }
 
 }

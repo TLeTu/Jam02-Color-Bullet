@@ -24,21 +24,16 @@ public class ShotgunBulletDmgDealer : DamageDealer
         {
             Vector2 direction = Quaternion.Euler(0, 0, angle * i - _angle / 2) * transform.right;
 
-            RaycastHit2D hit = Physics2D.Raycast(offsetPos, direction, _range);
+            RaycastHit2D hit = Physics2D.Raycast(offsetPos, direction, _range, _layerMask);
 
             if (hit.collider != null)
             {
-                //debug out collider
-                Debug.Log(hit.collider);
-
                 if (hit.collider.TryGetComponent(out DamageReceiver receiver))
                 {
                     if (!_hasDealDamge.Contains(receiver))
                     {
                         receiver.TakeDamage(dmg);
                         _hasDealDamge.Add(receiver);
-
-                        Debug.Log("Deal damage to " + receiver.name);
 
                         KnockBack(receiver, direction);
                     }
@@ -51,10 +46,8 @@ public class ShotgunBulletDmgDealer : DamageDealer
     private void KnockBack(DamageReceiver receiver, Vector2 direction)
     {
         UnitController unitController = receiver.GetComponentInParent<UnitController>();
+        unitController.OverideForce(_force, direction);
 
-        Debug.Log("Knock back " + receiver.name + " to " + direction);
-
-
-        unitController.AddForce(_force, direction);
+        Debug.Log("Knockback " + unitController.name);
     }
 }

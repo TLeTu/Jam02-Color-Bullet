@@ -40,7 +40,7 @@ public class GrenadeLauncherBulletDmgDealer : DamageDealer
         Debug.Log("Knock back " + receiver.name + " to " + direction);
 
 
-        unitController.AddForce(_force, direction);
+        unitController.OverideForce(_force, direction);
 
 
     }

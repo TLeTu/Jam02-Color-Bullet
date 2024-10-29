@@ -37,6 +37,7 @@ public class PlayerController : UnitController
     public override void AddForce(float force, Vector2 direction)
     {
         _playerMovement.LockMovement();
+        LockForce();
         base.AddForce(force, direction);
     }
 
@@ -48,6 +49,7 @@ public class PlayerController : UnitController
     protected override void ResetForce()
     {
         _playerMovement.UnlockMovement();
+        UnlockForce();
         base.ResetForce();
     }
 

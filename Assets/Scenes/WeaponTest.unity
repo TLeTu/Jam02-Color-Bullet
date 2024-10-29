@@ -602,14 +602,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _layerMasks: []
-  _force: 5
-  _range: 1.5
+  _force: 10
+  _range: 2
   _offset: -0.5
   _angle: 75
   _rayCount: 10
   _layerMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 128
 --- !u!1 &782151306
 GameObject:
   m_ObjectHideFlags: 0
@@ -940,7 +940,9 @@ MonoBehaviour:
   _animator: {fileID: 1317318094}
   _attackRange: 1
   _attackCooldown: 2
-  _moveSpeed: 5
+  _runMaxSpeed: 0
+  _runAccelAmount: 50
+  _runDeccelAmount: 50
   _target: {fileID: 0}
 --- !u!1 &1363975508
 GameObject:
@@ -1106,7 +1108,9 @@ MonoBehaviour:
   _animator: {fileID: 1317318094}
   _attackRange: 1
   _attackCooldown: 2
-  _moveSpeed: 5
+  _runMaxSpeed: 0
+  _runAccelAmount: 50
+  _runDeccelAmount: 50
   _target: {fileID: 0}
 --- !u!1 &1513756929
 GameObject:
@@ -1413,7 +1417,9 @@ MonoBehaviour:
   _animator: {fileID: 1317318094}
   _attackRange: 1
   _attackCooldown: 2
-  _moveSpeed: 5
+  _runMaxSpeed: 0
+  _runAccelAmount: 50
+  _runDeccelAmount: 50
   _target: {fileID: 0}
 --- !u!1 &1777232475
 GameObject:
@@ -1762,7 +1768,9 @@ MonoBehaviour:
   _animator: {fileID: 1317318094}
   _attackRange: 1
   _attackCooldown: 2
-  _moveSpeed: 5
+  _runMaxSpeed: 0
+  _runAccelAmount: 50
+  _runDeccelAmount: 50
   _target: {fileID: 0}
 --- !u!61 &247406285028857404
 BoxCollider2D:
