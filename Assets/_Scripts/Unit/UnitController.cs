@@ -45,4 +45,10 @@ public class UnitController : MonoBehaviour
         
     }
 
+    public virtual void OverideForce(float force, Vector2 direction)
+    {
+        _rb.linearVelocity = Vector2.zero;
+        AddForce(force, direction);
+    }
+
 }

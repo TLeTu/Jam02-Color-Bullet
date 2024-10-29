@@ -20,7 +20,7 @@ public abstract class PoolerBase<T> : MonoBehaviour where T : MonoBehaviour
         set => _pool = value;
     }
 
-    protected void InitPool(T prefab, GameObject holder = null, int initial = 10, int max = 20, bool collectionChecks = false) {
+    protected void InitPool(T prefab, GameObject holder = null, int initial = 100, int max = 1000, bool collectionChecks = false) {
         _prefab = prefab;
         _holder = holder;
         Pool = new ObjectPool<T>(
@@ -28,9 +28,7 @@ public abstract class PoolerBase<T> : MonoBehaviour where T : MonoBehaviour
             GetSetup,
             ReleaseSetup,
             DestroySetup,
-            collectionChecks,
-            initial,
-            max);
+            collectionChecks);
     }
 
     #region Overrides
@@ -39,15 +37,50 @@ public abstract class PoolerBase<T> : MonoBehaviour where T : MonoBehaviour
         T obj = Instantiate(_prefab);
         if (_holder != null) obj.transform.SetParent(_holder.transform);
         obj.gameObject.SetActive(false);
+        Debug.Log($"Created: {obj.name}");
         return obj;
     }
-    protected virtual void GetSetup(T obj) => obj.gameObject.SetActive(true);
-    protected virtual void ReleaseSetup(T obj) => obj.gameObject.SetActive(false);
-    protected virtual void DestroySetup(T obj) => Destroy(obj);
+    protected virtual void GetSetup(T obj)
+    {
+        if (obj == null)
+        {
+            Debug.LogWarning("Trying to activate a null object in the pool.");
+            return; // Or handle this case as you see fit
+        }
+        obj.gameObject.SetActive(true);
+    }
+    protected virtual void ReleaseSetup(T obj)
+    {
+
+        if (obj != null)
+        {
+            Debug.Log($"Releasing: {obj.name}");
+            obj.gameObject.SetActive(false);
+            // Optional: You can add any additional cleanup logic here
+        }
+    }
+
+
+    protected virtual void DestroySetup(T obj)
+    {
+        Debug.Log($"Destroying: {obj.name}");
+        Destroy(obj);
+    }
     #endregion
 
     #region Getters
-    public T Get() => Pool.Get();
+    public T Get()
+    {
+        T obj = Pool.Get();
+
+        if (obj == null)
+        {
+            obj = CreateSetup();
+        }
+
+        return obj;
+
+    }
     public void Release(T obj) => Pool.Release(obj);
     #endregion
 }

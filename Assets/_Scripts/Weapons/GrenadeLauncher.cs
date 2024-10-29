@@ -12,6 +12,9 @@ public class GrenadeLauncher : Weapon
 
         GrenadeLauncherBullet bullet = GetBullet() as GrenadeLauncherBullet;
 
+        bullet.transform.position = transform.position;
+        bullet.transform.rotation = transform.rotation;
+
         bullet.Firing(aimPoint);
     }
 }

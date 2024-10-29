@@ -36,14 +36,19 @@ public class PlayerController : UnitController
 
     public override void AddForce(float force, Vector2 direction)
     {
-        base.AddForce(force, direction);
         _playerMovement.LockMovement();
+        base.AddForce(force, direction);
+    }
+
+    public override void OverideForce(float force, Vector2 direction)
+    {
+        base.OverideForce(force, direction);
     }
 
     protected override void ResetForce()
     {
-        base.ResetForce();
         _playerMovement.UnlockMovement();
+        base.ResetForce();
     }
 
     #region COLLISION

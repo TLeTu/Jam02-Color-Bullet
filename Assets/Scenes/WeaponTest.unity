@@ -394,7 +394,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 6832938770662377844, guid: ad461649fee814a4594b642559cf3a06, type: 3}
+  m_Sprite: {fileID: 6832938770662377844, guid: 165a7b2991388bc47b4f227223ac19d6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -402,7 +402,7 @@ SpriteRenderer:
   m_Size: {x: 0.6875, y: 0.53125}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!114 &710294482
@@ -459,7 +459,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _layerMasks: []
-  _dmgRadius: 0.5
+  _dmgRadius: 1
   _force: 5
 --- !u!1 &722915469
 GameObject:
