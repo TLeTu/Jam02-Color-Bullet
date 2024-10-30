@@ -8,9 +8,10 @@ public class ShotgunBullet : Bullet
     [SerializeField] private float _damage;
     [SerializeField] private float offset;
 
-    public override void Initialize(Vector2 position)
+    public override void Initialize(Weapon weapon)
     {
-        transform.position = position;
+        transform.position = weapon.transform.position;
+        transform.rotation = weapon.transform.rotation;
     }
 
     public void Firing(Vector2 direction)

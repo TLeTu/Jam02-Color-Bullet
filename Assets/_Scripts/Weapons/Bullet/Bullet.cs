@@ -23,5 +23,5 @@ public abstract class Bullet : MonoBehaviour
         _despawnTimer.Start();
     }
 
-    public abstract void Initialize(Vector2 position);
+    public abstract void Initialize(Weapon sourceWeapon);
 }

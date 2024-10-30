@@ -526,10 +526,10 @@ GameObject:
   - component: {fileID: 1363975511}
   - component: {fileID: 1363975510}
   - component: {fileID: 1363975513}
-  - component: {fileID: 1363975512}
-  - component: {fileID: 1363975515}
   - component: {fileID: 1363975514}
   - component: {fileID: 1363975516}
+  - component: {fileID: 1363975515}
+  - component: {fileID: 1363975512}
   m_Layer: 7
   m_Name: Enemy_0
   m_TagString: Untagged
@@ -673,13 +673,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a41aa1cd92be3be458373808fff2354a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _rb: {fileID: 0}
+  _rb: {fileID: 1363975510}
   _forceTime: 0.5
   _runMaxSpeed: 5
   _runAccelAmount: 50
   _runDeccelAmount: 50
   _type: 0
-  _animator: {fileID: 0}
+  _animator: {fileID: 1363975514}
   _attackRange: 1
   _attackCooldown: 2
   _target: {fileID: 0}

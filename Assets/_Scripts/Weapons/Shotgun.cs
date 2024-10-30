@@ -12,12 +12,13 @@ public class Shotgun : Weapon
 
         ShotgunBullet bullet = GetBullet() as ShotgunBullet;
 
+        bullet.Initialize(this);
+
         bullet.Firing(direction);
 
         if (source != null)
         {
             source.OverideForce(_knockbackForce, -direction);
-            //Debug.Log(source.name + " Knock " + _knockbackForce + " - " + direction);
         }
 
     }

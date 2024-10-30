@@ -24,7 +24,7 @@ public abstract class Weapon : PoolerBase<Bullet>
     }
 
 
-    protected Bullet GetBullet()
+    protected virtual Bullet GetBullet()
     {
         return Get();
     }
@@ -37,7 +37,6 @@ public abstract class Weapon : PoolerBase<Bullet>
     protected override void GetSetup(Bullet obj)
     {
         base.GetSetup(obj);
-        obj.Initialize(transform.position);
 
         obj.Despawn += DespawnBullet;
     }

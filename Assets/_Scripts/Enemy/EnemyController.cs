@@ -39,8 +39,6 @@ public class EnemyController : UnitController
         At(attackState, chaseState, new FuncPredicate(() => _cooldownTimer.IsFinished || !_cooldownTimer.IsRunning));
 
         _stateMachine.SetState(chaseState);
-
-
     }
 
     void At(IState from, IState to, IPredicate condition) => _stateMachine.AddTransition(from, to, condition);
@@ -94,6 +92,11 @@ public class EnemyController : UnitController
     private void LongRangeAttack()
     {
         //fire a projectile
+
+    }
+
+    public void SetAnimatorController(AnimatorControllerParameter controller)
+    {
 
     }
 
