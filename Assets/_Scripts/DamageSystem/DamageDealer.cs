@@ -35,6 +35,11 @@ public class DamageDealer : MonoBehaviour
         _hasDealDamge.Clear();
     }
 
+    public virtual void DealOneShotDamage(float dmg, DamageReceiver receiver)
+    {
+        _hasDealDamge.Clear();
+    }
+
     protected virtual void DealOverTimeDamage()
     {
 

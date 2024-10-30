@@ -3,7 +3,7 @@ using UnityEngine;
 public class DefaultBullet : Bullet
 {
     [SerializeField] private Animator _animator;
-    [SerializeField] private GrenadeLauncherBulletDmgDealer _dealer;
+    [SerializeField] private DefaultBulletDmgDealer _dealer;
 
     [SerializeField] private float _flySpeed = 1;
     [SerializeField] private AnimationCurve _animationCurve;
@@ -12,13 +12,13 @@ public class DefaultBullet : Bullet
 
     private Vector2 _startPoint;
     private Vector2 _aimPoint;
+    private Vector2 _direction;
     private bool _isFlying;
     private float _flyTime;
 
     private float _currentCurve;
 
     private static readonly int FlyAnimation = Animator.StringToHash("Fly");
-    private static readonly int ExplodeAnimation = Animator.StringToHash("Explode");
 
 
     private void Awake()
@@ -55,16 +55,16 @@ public class DefaultBullet : Bullet
     public void Firing(Vector2 aimPoint)
     {
         _startPoint = (Vector2)transform.position;
-        _aimPoint = aimPoint;
         _isFlying = true;
+        _direction = (aimPoint - _startPoint.normalized) ;
+        _aimPoint = GetPointOutsideCamera(_startPoint, aimPoint);
         _flyTime = Vector2.Distance(_startPoint, _aimPoint) / _flySpeed;
 
-        RotateToAimPoint(aimPoint);
+        RotateToAimPoint(_direction);
     }
 
-    private void RotateToAimPoint(Vector2 aimPoint)
+    private void RotateToAimPoint(Vector2 direction)
     {
-        Vector2 direction = aimPoint - (Vector2)transform.position;
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
     }
@@ -79,19 +79,33 @@ public class DefaultBullet : Bullet
 
         if (_currentCurve >= 1)
         {
-            Explode();
             _isFlying = false;
+            StartDespawnTimer();
         }
 
     }
-
-    private void Explode()
+    public Vector2 GetPointOutsideCamera(Vector2 startPoint, Vector2 aimPoint)
     {
-        _animator.CrossFade(ExplodeAnimation, 0, 0);
+        Camera camera = Camera.main;
 
+        Vector2 direction = (aimPoint - startPoint).normalized;
 
-        _dealer.DealOneShotDamage(_damage);
+        Vector3 screenBottomLeft = camera.ScreenToWorldPoint(new Vector3(0, 0, camera.nearClipPlane));
+        Vector3 screenTopRight = camera.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, camera.nearClipPlane));
+        float maxScreenDistance = Vector2.Distance(screenBottomLeft, screenTopRight) / 2;
 
-        StartDespawnTimer();
+        Vector2 aimPoint2 = aimPoint + direction * maxScreenDistance;
+
+        return aimPoint2;
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.TryGetComponent(out DamageReceiver receiver))
+        {
+            _dealer.DealOneShotDamage(_damage, receiver);
+            _isFlying = false;
+            StartDespawnTimer();
+        }
     }
 }

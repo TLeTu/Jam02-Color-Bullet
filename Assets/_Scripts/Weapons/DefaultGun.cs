@@ -6,7 +6,7 @@ public class DefaultGun : Weapon
     {
         if (!CanFire()) return;
 
-        GrenadeLauncherBullet bullet = GetBullet() as GrenadeLauncherBullet;
+        DefaultBullet bullet = GetBullet() as DefaultBullet;
 
         bullet.Initialize(this);
 
