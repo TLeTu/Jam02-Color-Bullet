@@ -1,3 +1,4 @@
+using System;
 using TMPro;
 using UnityEngine;
 using Utilities;
@@ -45,6 +46,7 @@ public class UnitController : MonoBehaviour
     {
     }
 
+
     protected virtual void ResetForce()
     {
         _rb.linearVelocity = Vector2.zero;
@@ -71,8 +73,10 @@ public class UnitController : MonoBehaviour
         LockForce();
     }
 
-    private void Locomotion(Vector2 movement)
+    protected void Locomotion(Vector2 movement)
     {
+        if (_lockForce) return;
+
         #region NO TOUCHING
         float targetSpeedX = movement.x * _runMaxSpeed;
         float targetSpeedY = movement.y * _runMaxSpeed;

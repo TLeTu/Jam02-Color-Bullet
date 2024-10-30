@@ -9,6 +9,6 @@ public class EnemyChaseState : EnemyBaseState
 
     public override void FixedUpdate()
     {
-        enemy.FollowTarget();
+        enemy.HandleMovement();
     }
 }

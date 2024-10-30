@@ -1,6 +1,7 @@
 using UnityEngine;
 using StateMachineBehaviour;
 using Utilities;
+using System;
 
 public class EnemyController : UnitController
 {
@@ -11,11 +12,6 @@ public class EnemyController : UnitController
     [Header("Attack Setting")]
     [SerializeField] private float _attackRange;
     [SerializeField] private float _attackCooldown;
-
-    [Header("Movement")]
-    [SerializeField] private float _runMaxSpeed = 5f;
-    [SerializeField] private float _runAccelAmount = 50f;
-    [SerializeField] private float _runDeccelAmount = 50f;
 
     [Header("Target")]
     [SerializeField] private UnitController _target;
@@ -54,7 +50,6 @@ public class EnemyController : UnitController
     {
         base.Update();
         _stateMachine.Update();
-
         _cooldownTimer.Tick(Time.deltaTime);
     }
 
@@ -63,33 +58,11 @@ public class EnemyController : UnitController
         _stateMachine.FixedUpdate();
     }
 
-    public void FollowTarget()
+    public void HandleMovement()
     {
-        if (_lockForce) return;
-
         Vector2 direction = (_target.transform.position - transform.position).normalized;
 
-        #region NO TOUCHING
-        float targetSpeedX = direction.x * _runMaxSpeed;
-        float targetSpeedY = direction.y * _runMaxSpeed;
-
-        targetSpeedX = Mathf.Lerp(_rb.linearVelocity.x, targetSpeedX, 1);
-        targetSpeedY = Mathf.Lerp(_rb.linearVelocity.y, targetSpeedY, 1);
-
-        float accelRateX;
-        float accelRateY;
-
-        accelRateX = (Mathf.Abs(targetSpeedX) > 0.01f) ? _runAccelAmount : _runDeccelAmount;
-        accelRateY = (Mathf.Abs(targetSpeedY) > 0.01f) ? _runAccelAmount : _runDeccelAmount;
-
-        float speedDifX = targetSpeedX - _rb.linearVelocity.x;
-        float speedDifY = targetSpeedY - _rb.linearVelocity.y;
-
-        float movementX = speedDifX * accelRateX;
-        float movementY = speedDifY * accelRateY;
-        #endregion
-
-        _rb.AddForce(new Vector2(movementX, movementY), ForceMode2D.Force);
+        Locomotion(direction);
     }
 
     public bool IsInRange()

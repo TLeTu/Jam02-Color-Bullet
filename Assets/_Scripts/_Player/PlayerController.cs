@@ -10,6 +10,10 @@ public class PlayerController : UnitController
     #endregion
     #region DATA
     private PlayerColor _playerColor;
+
+    private Vector2 _moveInput;
+    private Vector3 _mousePositon;
+    private Vector2 _direction;
     #endregion
     protected override void Awake()
     {
@@ -32,11 +36,35 @@ public class PlayerController : UnitController
         {
             _weaponController.FireCurrentWeapon(this);
         }
+
+        _moveInput = InputReader.Instance.Direction;
+        _mousePositon = InputReader.Instance.AimPoint;
+
+        FaceToDirection();
+    }
+
+    protected override void FixedUpdate()
+    {
+        Locomotion(_moveInput);
+    }
+
+    private void FaceToDirection()
+    {
+        _direction = (_mousePositon - transform.position).normalized;
+        if (_direction.x > 0)
+        {
+            transform.localScale = new Vector3(-1, 1, 1);
+            transform.right = _direction;
+        }
+        else if (_direction.x < 0)
+        {
+            transform.localScale = new Vector3(1, 1, 1);
+            transform.right = -_direction;
+        }
     }
 
     public override void AddForce(float force, Vector2 direction)
     {
-        _playerMovement.LockMovement();
         LockForce();
         base.AddForce(force, direction);
     }
@@ -48,7 +76,6 @@ public class PlayerController : UnitController
 
     protected override void ResetForce()
     {
-        _playerMovement.UnlockMovement();
         UnlockForce();
         base.ResetForce();
     }

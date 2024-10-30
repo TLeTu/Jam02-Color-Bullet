@@ -675,13 +675,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _rb: {fileID: 0}
   _forceTime: 0.5
+  _runMaxSpeed: 5
+  _runAccelAmount: 50
+  _runDeccelAmount: 50
   _type: 0
   _animator: {fileID: 0}
   _attackRange: 1
   _attackCooldown: 2
-  _runMaxSpeed: 5
-  _runAccelAmount: 50
-  _runDeccelAmount: 50
   _target: {fileID: 0}
 --- !u!212 &1363975516
 SpriteRenderer:
@@ -957,6 +957,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d46531043f1eb4e4ab9c17dbf727cea1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _moveAction: {fileID: -1680190386980627800, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   _aimAction: {fileID: -9147565715067559916, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   _fireAction: {fileID: 1120369429361536294, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   _changeWeaponsAction: {fileID: 5486222973488085631, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
@@ -1033,9 +1034,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41a9799ca268e0045a2e7e7b35acf71c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _runMaxSpeed: 9.5
-  _runAccelAmount: 50
-  _runDeccelAmount: 50
 --- !u!50 &2224449151071060349
 Rigidbody2D:
   serializedVersion: 5
@@ -1109,6 +1107,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _rb: {fileID: 2224449151071060349}
   _forceTime: 0.2
+  _runMaxSpeed: 5
+  _runAccelAmount: 50
+  _runDeccelAmount: 50
   _playerAnimator: {fileID: 5849829796433662272}
   _playerMovement: {fileID: 534215725983173223}
   _weaponController: {fileID: 1513756931}
