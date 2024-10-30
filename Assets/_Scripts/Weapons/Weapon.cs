@@ -31,13 +31,16 @@ public abstract class Weapon : PoolerBase<Bullet>
 
     protected void DespawnBullet(Bullet bullet)
     {
-        Release(bullet);
+        Return(bullet);
+    }
+
+    protected override void Initialize(Bullet obj)
+    {
+        obj.Initialize(this);
     }
 
     protected override void GetSetup(Bullet obj)
     {
-        base.GetSetup(obj);
-
         obj.Despawn += DespawnBullet;
     }
 

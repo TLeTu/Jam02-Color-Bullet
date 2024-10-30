@@ -56,6 +56,11 @@ public class EnemyController : UnitController
         _stateMachine.FixedUpdate();
     }
 
+    public void Initialize (EnemyType type, EnemySpawner spawner)
+    {
+
+    }
+
     public void HandleMovement()
     {
         Vector2 direction = (_target.transform.position - transform.position).normalized;
