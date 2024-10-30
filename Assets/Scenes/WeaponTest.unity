@@ -188,9 +188,11 @@ MonoBehaviour:
   _closeRangeSpeed: 2
   _closeRangeAtkRange: 1
   _closeRangeAtkCooldown: 1
+  _closeRangeHealth: 1
   _longRangeSpeed: 2
   _longRangeAtkRange: 5
   _longRangeAtkCooldown: 2
+  _longRangeHealth: 1
 --- !u!4 &379655805
 Transform:
   m_ObjectHideFlags: 0
@@ -620,6 +622,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9dca164c9eacfc4ca275bfc1dc305ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _prefab: {fileID: 1150464453}
+  _holder: {fileID: 1228475965}
   _fireRate: 3
   _bulletPrefab: {fileID: 1150464453}
   _bulletHolder: {fileID: 1228475965}
@@ -668,10 +672,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 589306603c9a1db4d9afba2077b69492, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _prefab: {fileID: 1804118779}
+  _holder: {fileID: 1228475965}
   _fireRate: 1
   _bulletPrefab: {fileID: 1804118779}
   _bulletHolder: {fileID: 1228475965}
-  _specificLockForceTime: 10
+  _specificLockForceTime: 1
 --- !u!1 &1150464448
 GameObject:
   m_ObjectHideFlags: 0
@@ -922,7 +928,7 @@ GameObject:
   - component: {fileID: 1363975514}
   - component: {fileID: 1363975516}
   - component: {fileID: 1363975515}
-  - component: {fileID: 1363975512}
+  - component: {fileID: 1363975517}
   m_Layer: 7
   m_Name: Enemy
   m_TagString: Untagged
@@ -972,20 +978,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 379655805}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1363975512
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1363975508}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 51daf43321974e5489eafc1e3f8dace5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _maxHP: 0
-  _currentHP: 0
 --- !u!61 &1363975513
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1073,6 +1065,7 @@ MonoBehaviour:
   _runDeccelAmount: 50
   _type: 0
   _animator: {fileID: 1363975514}
+  _damageReceiver: {fileID: 1363975517}
   _attackRange: 1
   _attackCooldown: 2
   _target: {fileID: 0}
@@ -1131,6 +1124,20 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1363975517
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1363975508}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b856915592f6fc0489ece36042b66173, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _maxHP: 1
+  _currentHP: 0
 --- !u!1 &1513756929
 GameObject:
   m_ObjectHideFlags: 0
@@ -1486,7 +1493,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b3b0753e42c554458ff93524ada9210, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _despawnTime: 0
+  _despawnTime: 2
   _animator: {fileID: 1804118777}
   _dealer: {fileID: 1804118780}
   _flySpeed: 20
@@ -1514,7 +1521,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  _damage: 0
+  _damage: 5
 --- !u!114 &1804118780
 MonoBehaviour:
   m_ObjectHideFlags: 0

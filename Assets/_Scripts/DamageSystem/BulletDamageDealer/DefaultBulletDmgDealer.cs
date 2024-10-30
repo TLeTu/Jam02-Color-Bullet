@@ -22,6 +22,8 @@ public class DefaultBulletDmgDealer : DamageDealer
     {
         UnitController unitController = receiver.GetComponentInParent<UnitController>();
 
+        if (unitController == null) return;
+
         Vector2 direction = (receiver.transform.position - transform.position).normalized;
 
         Debug.Log("Knock back " + receiver.name + " to " + direction);

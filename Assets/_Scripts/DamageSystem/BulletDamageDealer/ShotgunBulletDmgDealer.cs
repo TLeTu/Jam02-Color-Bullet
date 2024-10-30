@@ -46,6 +46,9 @@ public class ShotgunBulletDmgDealer : DamageDealer
     private void KnockBack(DamageReceiver receiver, Vector2 direction)
     {
         UnitController unitController = receiver.GetComponentInParent<UnitController>();
+
+        if (unitController == null) return;
+
         unitController.OverideForce(_force, direction);
 
         Debug.Log("Knockback " + unitController.name);

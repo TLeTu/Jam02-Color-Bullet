@@ -3,10 +3,15 @@ using UnityEngine;
 
 public class DamageReceiver : MonoBehaviour
 {
-    [SerializeField] private float _maxHP;
-    [SerializeField] private float _currentHP;
+    [SerializeField][Min(1)] protected float _maxHP;
+    [SerializeField] protected float _currentHP;
 
-    public void TakeDamage(float dmg)
+    protected virtual void OnEnable()
+    {
+        _currentHP = _maxHP;
+    }
+
+    public virtual void TakeDamage(float dmg)
     {
         _currentHP -= dmg;
 

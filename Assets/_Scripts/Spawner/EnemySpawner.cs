@@ -14,10 +14,12 @@ public class EnemySpawner : PoolerBase<EnemyController>
     [SerializeField] private float _closeRangeSpeed = 2f;
     [SerializeField] private float _closeRangeAtkRange = 1f;
     [SerializeField] private float _closeRangeAtkCooldown = 1f;
+    [SerializeField] private float _closeRangeHealth = 1f;
     [Header("Ranged Enemy Settings")]
     [SerializeField] private float _longRangeSpeed = 2f;
     [SerializeField] private float _longRangeAtkRange = 5f;
     [SerializeField] private float _longRangeAtkCooldown = 2f;
+    [SerializeField] private float _longRangeHealth = 1f;
     [Header("Visual Enemy")]
     [SerializeField] private List<AnimatorControllerParameter> _closeRangeAnimator;
     [SerializeField] private List<AnimatorControllerParameter> _longRangeAnimator;

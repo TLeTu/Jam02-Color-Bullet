@@ -8,6 +8,7 @@ public class EnemyController : UnitController
     [Header("Enemy Setting")]
     [SerializeField] private EnemyType _type;
     [SerializeField] private Animator _animator;
+    [SerializeField] private EnemyDamageReceiver _damageReceiver;
 
     [Header("Attack Setting")]
     [SerializeField] private float _attackRange;
@@ -36,6 +37,8 @@ public class EnemyController : UnitController
             //add an animator component
             _animator = gameObject.AddComponent<Animator>();
         }
+
+        _damageReceiver.DeathAction += () => DespawnAction?.Invoke(this);
     }
 
     protected override void Start()
