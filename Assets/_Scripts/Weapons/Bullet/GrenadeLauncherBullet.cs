@@ -18,6 +18,10 @@ public class GrenadeLauncherBullet : Bullet
 
     private float _currentCurve;
 
+    private static readonly int FlyAnimation = Animator.StringToHash("Fly");
+    private static readonly int ExplodeAnimation = Animator.StringToHash("Explode");
+
+
     private void Awake()
     {
         _animator = GetComponent<Animator>();
@@ -39,9 +43,14 @@ public class GrenadeLauncherBullet : Bullet
         }
     }
 
-    public override void Initialize(Vector2 position)
+    public override void Initialize(Weapon sourceWeapon)
     {
-        transform.position = position;
+        transform.position = sourceWeapon.transform.position;
+        transform.rotation = sourceWeapon.transform.rotation;
+
+        _animator.CrossFade(FlyAnimation, 0, 0);
+
+
     }
 
     public void Firing(Vector2 aimPoint)
@@ -79,7 +88,9 @@ public class GrenadeLauncherBullet : Bullet
 
     private void Explode()
     {
-        _animator.SetTrigger("Explode");
+        _animator.CrossFade(ExplodeAnimation, 0, 0);
+
+
         _dealer.DealOneShotDamage(_damage);
 
         StartDespawnTimer();
