@@ -8,7 +8,7 @@ public class EnemyController : UnitController
     [Header("Enemy Setting")]
     [SerializeField] private EnemyType _type;
     [SerializeField] private Animator _animator;
-    
+
     [Header("Attack Setting")]
     [SerializeField] private float _attackRange;
     [SerializeField] private float _attackCooldown;
@@ -16,10 +16,27 @@ public class EnemyController : UnitController
     [Header("Target")]
     [SerializeField] private UnitController _target;
 
+    public Action<EnemyController> DespawnAction { get; set; }
+
 
     StateMachine _stateMachine;
 
     CountdownTimer _cooldownTimer;
+
+    public EnemyType Type => _type;
+
+    protected override void Awake()
+    {
+        base.Awake();
+
+        _animator = GetComponent<Animator>();
+
+        if (_animator == null)
+        {
+            //add an animator component
+            _animator = gameObject.AddComponent<Animator>();
+        }
+    }
 
     protected override void Start()
     {
@@ -60,7 +77,6 @@ public class EnemyController : UnitController
     {
 
     }
-
     public void HandleMovement()
     {
         Vector2 direction = (_target.transform.position - transform.position).normalized;

@@ -3,9 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 public abstract class PoolerBase<T> : MonoBehaviour where T : MonoBehaviour 
 {
-    private T _prefab;
-    private List<T> _pool;
-    private GameObject _holder;
+    [Header("Pooler Settings")]
+    [SerializeField] protected T _prefab;
+    [SerializeField] private GameObject _holder;
+    [Space]
+
+    protected List<T> _pool;
+
+    private int _count = 0;
 
     private List<T> Pool {
         get {
@@ -13,6 +18,14 @@ public abstract class PoolerBase<T> : MonoBehaviour where T : MonoBehaviour
             return _pool;
         }
         set => _pool = value;
+    }
+
+    protected virtual void Awake()
+    {
+        if (_prefab == null) throw new InvalidOperationException("Prefab is not set.");
+        if (_holder == null) throw new InvalidOperationException("Holder is not set.");
+
+        InitPool(_prefab, _holder);
     }
 
     protected void InitPool(T prefab, GameObject holder = null) {
@@ -46,6 +59,9 @@ public abstract class PoolerBase<T> : MonoBehaviour where T : MonoBehaviour
     {
         var obj = Instantiate(_prefab, _holder.transform);
         obj.gameObject.SetActive(false);
+
+        obj.name = _prefab.name + " - " + _count;
+        _count++;
 
         GetSetup(obj);
 

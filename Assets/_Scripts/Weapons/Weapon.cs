@@ -12,9 +12,10 @@ public abstract class Weapon : PoolerBase<Bullet>
 
     protected CountdownTimer _fireTimer;
 
-    protected virtual void Awake()
+    protected override void Awake()
     {
-        InitPool(_bulletPrefab, _bulletHolder);
+        base.Awake();
+
         _fireTimer = new CountdownTimer(1f / _fireRate);
     }
 

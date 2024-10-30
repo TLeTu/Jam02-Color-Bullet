@@ -21,6 +21,13 @@ public class UnitController : MonoBehaviour
     protected virtual void Awake()
     {
         _rb = GetComponent<Rigidbody2D>();
+
+        if (_rb == null)
+        {
+            //add a rigidbody2d component
+            _rb = gameObject.AddComponent<Rigidbody2D>();
+        }
+
     }
 
     protected virtual void Start()

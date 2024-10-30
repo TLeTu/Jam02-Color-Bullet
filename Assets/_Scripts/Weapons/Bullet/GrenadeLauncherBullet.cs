@@ -49,8 +49,6 @@ public class GrenadeLauncherBullet : Bullet
         transform.rotation = sourceWeapon.transform.rotation;
 
         _animator.CrossFade(FlyAnimation, 0, 0);
-
-
     }
 
     public void Firing(Vector2 aimPoint)
