@@ -13,7 +13,7 @@ public class SniperBulletDmgDealer : DamageDealer
         {
             receiver.TakeDamage(dmg);
             _hasDealDamge.Add(receiver);
-            Knockback(receiver);
+            //Knockback(receiver);
             Debug.Log("Deal damage to " + receiver.name);
         }
 

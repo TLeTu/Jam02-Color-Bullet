@@ -47,9 +47,12 @@ public class UnitController : MonoBehaviour
     }
 
 
-    protected virtual void ResetForce()
+    public virtual void ResetForce()
     {
         _rb.linearVelocity = Vector2.zero;
+
+        _forceTimer.Reset(_forceTime);
+
         _forceTimer.Stop();
 
         UnlockForce();
@@ -62,14 +65,18 @@ public class UnitController : MonoBehaviour
     {
         _rb.AddForce(direction * force, ForceMode2D.Impulse);
         _forceTimer.Start();
-        
     }
 
-    public virtual void OverideForce(float force, Vector2 direction)
+    public virtual void OverideForce(float force, Vector2 direction, float timer = -1)
     {
         _rb.linearVelocity = Vector2.zero;
-        AddForce(force, direction);
 
+        if (timer > 0)
+        {
+            _forceTimer.Reset(timer);
+        }
+
+        AddForce(force, direction);
         LockForce();
     }
 
