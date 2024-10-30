@@ -1,22 +1,34 @@
 fileFormatVersion: 2
-guid: 942c856b8586d4840a92a85f56d3818a
+guid: ed1567eec0e5a334194a5683c56c0b09
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -4978096116803119825
-    second: Red-Bullet-Splash-Sheet_0
+      213: -611059841543862233
+    second: Round-Bullet-Sheet_0
   - first:
-      213: -669631608292916339
-    second: Red-Bullet-Splash-Sheet_1
+      213: -2216251742928983789
+    second: Round-Bullet-Sheet_1
   - first:
-      213: 9002779713372419370
-    second: Red-Bullet-Splash-Sheet_2
+      213: 2522308252886868704
+    second: Round-Bullet-Sheet_2
   - first:
-      213: -2666520292625218187
-    second: Red-Bullet-Splash-Sheet_3
+      213: -2288992355098661088
+    second: Round-Bullet-Sheet_3
   - first:
-      213: -6088967601022869938
-    second: Red-Bullet-Splash-Sheet_4
+      213: 4637496067079501947
+    second: Round-Bullet-Sheet_4
+  - first:
+      213: 3990942397815774765
+    second: Round-Bullet-Sheet_5
+  - first:
+      213: 7348714560938793383
+    second: Round-Bullet-Sheet_6
+  - first:
+      213: 263812110779342773
+    second: Round-Bullet-Sheet_7
+  - first:
+      213: 4744036855790857930
+    second: Round-Bullet-Sheet_8
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -63,7 +75,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 16
+  spritePixelsToUnits: 32
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -112,13 +124,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Red-Bullet-Splash-Sheet_0
+      name: Round-Bullet-Sheet_0
       rect:
         serializedVersion: 2
-        x: 6
-        y: 7
-        width: 20
-        height: 19
+        x: 0
+        y: 64
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -127,20 +139,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: f25d234f4ff3aeab0800000000000000
-      internalID: -4978096116803119825
+      spriteID: 7288548cf441587f0800000000000000
+      internalID: -611059841543862233
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Red-Bullet-Splash-Sheet_1
+      name: Round-Bullet-Sheet_1
       rect:
         serializedVersion: 2
-        x: 37
-        y: 6
-        width: 22
-        height: 22
+        x: 32
+        y: 64
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -149,20 +161,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: d83c351a99df4b6f0800000000000000
-      internalID: -669631608292916339
+      spriteID: 319a0e138ca4e31e0800000000000000
+      internalID: -2216251742928983789
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Red-Bullet-Splash-Sheet_2
+      name: Round-Bullet-Sheet_2
       rect:
         serializedVersion: 2
-        x: 68
-        y: 5
-        width: 24
-        height: 26
+        x: 64
+        y: 64
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -171,20 +183,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: a25f7a6537c40fc70800000000000000
-      internalID: 9002779713372419370
+      spriteID: 0e2ab530ef9010320800000000000000
+      internalID: 2522308252886868704
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Red-Bullet-Splash-Sheet_3
+      name: Round-Bullet-Sheet_3
       rect:
         serializedVersion: 2
-        x: 97
-        y: 3
-        width: 29
-        height: 28
+        x: 0
+        y: 32
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -193,17 +205,61 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 57504b3fbed9efad0800000000000000
-      internalID: -2666520292625218187
+      spriteID: 02f62c4a49ddb30e0800000000000000
+      internalID: -2288992355098661088
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Red-Bullet-Splash-Sheet_4
+      name: Round-Bullet-Sheet_4
       rect:
         serializedVersion: 2
-        x: 128
+        x: 32
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b787b8d3a12bb5040800000000000000
+      internalID: 4637496067079501947
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Round-Bullet-Sheet_5
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d2edad447fca26730800000000000000
+      internalID: 3990942397815774765
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Round-Bullet-Sheet_6
+      rect:
+        serializedVersion: 2
+        x: 0
         y: 0
         width: 32
         height: 32
@@ -215,8 +271,52 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: e4e5b244a34af7ba0800000000000000
-      internalID: -6088967601022869938
+      spriteID: 7a95f7045f0ebf560800000000000000
+      internalID: 7348714560938793383
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Round-Bullet-Sheet_7
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5bfd27e87bf39a300800000000000000
+      internalID: 263812110779342773
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Round-Bullet-Sheet_8
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ace66c6a26436d140800000000000000
+      internalID: 4744036855790857930
       vertices: []
       indices: 
       edges: []
@@ -225,7 +325,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 6eda51ec4f71e77468389c5337053d82
     internalID: 0
     vertices: []
     indices: 
@@ -235,11 +335,15 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Red-Bullet-Splash-Sheet_0: -4978096116803119825
-      Red-Bullet-Splash-Sheet_1: -669631608292916339
-      Red-Bullet-Splash-Sheet_2: 9002779713372419370
-      Red-Bullet-Splash-Sheet_3: -2666520292625218187
-      Red-Bullet-Splash-Sheet_4: -6088967601022869938
+      Round-Bullet-Sheet_0: -611059841543862233
+      Round-Bullet-Sheet_1: -2216251742928983789
+      Round-Bullet-Sheet_2: 2522308252886868704
+      Round-Bullet-Sheet_3: -2288992355098661088
+      Round-Bullet-Sheet_4: 4637496067079501947
+      Round-Bullet-Sheet_5: 3990942397815774765
+      Round-Bullet-Sheet_6: 7348714560938793383
+      Round-Bullet-Sheet_7: 263812110779342773
+      Round-Bullet-Sheet_8: 4744036855790857930
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

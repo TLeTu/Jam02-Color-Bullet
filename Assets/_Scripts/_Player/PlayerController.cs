@@ -1,3 +1,4 @@
+using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
 
 public class PlayerController : UnitController
@@ -69,12 +70,12 @@ public class PlayerController : UnitController
         base.AddForce(force, direction);
     }
 
-    public override void OverideForce(float force, Vector2 direction)
+    public override void OverideForce(float force, Vector2 direction, float timer = -1)
     {
-        base.OverideForce(force, direction);
+        base.OverideForce(force, direction, timer);
     }
 
-    protected override void ResetForce()
+    public override void ResetForce()
     {
         UnlockForce();
         base.ResetForce();
