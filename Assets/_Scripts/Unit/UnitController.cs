@@ -8,6 +8,11 @@ public class UnitController : MonoBehaviour
     [SerializeField] protected Rigidbody2D _rb;
     [SerializeField] private float _forceTime;
 
+    [Header("Movement")]
+    [SerializeField] private float _runMaxSpeed = 5f;
+    [SerializeField] private float _runAccelAmount = 50f;
+    [SerializeField] private float _runDeccelAmount = 50f;
+
     private CountdownTimer _forceTimer;
 
     protected bool _lockForce;
@@ -24,7 +29,6 @@ public class UnitController : MonoBehaviour
         _forceTimer.Stop();
 
         _lockForce = false;
-
     }
 
     protected virtual void Update()
@@ -65,6 +69,32 @@ public class UnitController : MonoBehaviour
         AddForce(force, direction);
 
         LockForce();
+    }
+
+    private void Locomotion(Vector2 movement)
+    {
+        #region NO TOUCHING
+        float targetSpeedX = movement.x * _runMaxSpeed;
+        float targetSpeedY = movement.y * _runMaxSpeed;
+
+        targetSpeedX = Mathf.Lerp(_rb.linearVelocity.x, targetSpeedX, 1);
+        targetSpeedY = Mathf.Lerp(_rb.linearVelocity.y, targetSpeedY, 1);
+
+        float accelRateX;
+        float accelRateY;
+
+        accelRateX = (Mathf.Abs(targetSpeedX) > 0.01f) ? _runAccelAmount : _runDeccelAmount;
+        accelRateY = (Mathf.Abs(targetSpeedY) > 0.01f) ? _runAccelAmount : _runDeccelAmount;
+
+        float speedDifX = targetSpeedX - _rb.linearVelocity.x;
+        float speedDifY = targetSpeedY - _rb.linearVelocity.y;
+
+        float movementX = speedDifX * accelRateX;
+        float movementY = speedDifY * accelRateY;
+        #endregion
+
+        _rb.AddForce(new Vector2(movementX, movementY), ForceMode2D.Force);
+
     }
 
 }
