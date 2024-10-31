@@ -89,6 +89,8 @@ public class EnemyController : UnitController
         AnimatorController controller = spawner.RandomLongRangeAnimator;
         SetAnimatorController(controller);
 
+        _damageReceiver.SetMaxHP(type == EnemyType.CloseRange ? spawner.CloseRangeHealth : spawner.LongRangeHealth);
+
         float dmg;
         float range;
         float duration;
@@ -134,8 +136,6 @@ public class EnemyController : UnitController
 
         _cooldownTimer.Reset();
         _cooldownTimer.Start();
-
-        Debug.Log("Attack");
 
         switch(_type)
         {

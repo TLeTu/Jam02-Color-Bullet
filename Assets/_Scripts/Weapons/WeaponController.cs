@@ -1,11 +1,11 @@
 using NUnit.Framework;
 using System.Collections.Generic;
 using UnityEngine;
+using Utilities;
 
 public class WeaponController : MonoBehaviour
 {
     [SerializeField] private List<Weapon> _weapons;
-
     [SerializeField] private int _currentWeaponIndex = 0;
 
     public Weapon CurrentWeapon => _weapons[_currentWeaponIndex];
@@ -36,4 +36,25 @@ public class WeaponController : MonoBehaviour
         _currentWeaponIndex = (_currentWeaponIndex + 1) % _weapons.Count;
     }
 
+    public void ChangeWeapon(PlayerColor color)
+    {
+        switch (color)
+        {
+            case PlayerColor.White:
+                SwitchWeapon(0);
+                break;
+            case PlayerColor.Red:
+                SwitchWeapon(1);
+                break;
+            case PlayerColor.Orange:
+                SwitchWeapon(2);
+                break;
+            case PlayerColor.Purple:
+                SwitchWeapon(3);
+                break;
+            default:
+                Debug.LogWarning("Invalid color");
+                break;
+        }
+    }
 }

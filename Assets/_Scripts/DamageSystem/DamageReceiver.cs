@@ -3,11 +3,17 @@ using UnityEngine;
 
 public class DamageReceiver : MonoBehaviour
 {
-    [SerializeField][Min(1)] protected float _maxHP;
+    protected float _maxHP;
     [SerializeField] protected float _currentHP;
 
     protected virtual void OnEnable()
     {
+        _currentHP = _maxHP;
+    }
+
+    public void SetMaxHP(float maxHP)
+    {
+        _maxHP = maxHP;
         _currentHP = _maxHP;
     }
 

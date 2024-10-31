@@ -5,12 +5,9 @@ using static UnityEngine.GraphicsBuffer;
 
 public class EnemyWeapon : Weapon
 {
-    [Header("Attack Setting")]
-    [SerializeField] private float _attackDamage;
-
     public void SetupWeapon(float attackDamage)
     {
-        _attackDamage = attackDamage;
+        _damage = attackDamage;
     }
 
     public void CloseRangeAttack(UnitController target)
@@ -31,6 +28,5 @@ public class EnemyWeapon : Weapon
 
     public override void Fire(Vector2 aimPoint, UnitController source = null)
     {
-        throw new NotImplementedException();
     }
 }

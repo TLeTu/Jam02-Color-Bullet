@@ -16,6 +16,14 @@ public abstract class Weapon : PoolerBase<Bullet>
         base.Awake();
 
         _fireTimer = new CountdownTimer(1f / _fireRate);
+
+        if (_prefab == null) throw new System.InvalidOperationException("Prefab is not set.");
+        if (_holder == null)
+        {
+            //find a holder object name "Bullet Holder"
+            _holder = GameObject.Find("BulletHolder");
+        }
+
     }
 
     protected virtual void Update()

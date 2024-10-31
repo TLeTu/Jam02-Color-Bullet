@@ -5,11 +5,11 @@ using Utilities;
 
 public class UnitController : MonoBehaviour
 {
-    [Header("Unit Setting")]
+    [Header("Unit Base")]
     [SerializeField] protected Rigidbody2D _rb;
     [SerializeField] private float _forceTime;
 
-    [Header("Movement")]
+    [Header("Movement Setting")]
     [SerializeField] private float _runMaxSpeed = 5f;
     [SerializeField] private float _runAccelAmount = 50f;
     [SerializeField] private float _runDeccelAmount = 50f;

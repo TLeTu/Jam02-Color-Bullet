@@ -11,6 +11,8 @@ public class ShotgunBullet : Bullet
     {
         transform.position = weapon.transform.position;
         transform.rotation = weapon.transform.rotation;
+
+        _sourceWeapon = weapon;
     }
 
     public void Firing(Vector2 direction)
@@ -20,7 +22,7 @@ public class ShotgunBullet : Bullet
         //offset the bullet's position so it doesn't collide with the player
         transform.position += (Vector3)direction * offset;
 
-        _dealer.DealOneShotDamage(_damage);
+        _dealer.DealOneShotDamage(_sourceWeapon.Damage);
 
         StartDespawnTimer();
     }

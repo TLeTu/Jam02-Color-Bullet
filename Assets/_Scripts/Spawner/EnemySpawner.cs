@@ -7,6 +7,9 @@ using Utilities;
 
 public class EnemySpawner : PoolerBase<EnemyController>
 {
+    [Header("SpawnPool")]
+    [SerializeField] private ColorPoolSpawner _colorPoolSpawner;
+
     [Header("Spawner Settings")]
     [SerializeField] private Transform topleftLimit;
     [SerializeField] private Transform bottomdownLimit;
@@ -85,6 +88,7 @@ public class EnemySpawner : PoolerBase<EnemyController>
 
     private void Despawn(EnemyController obj)
     {
+        _colorPoolSpawner.SpawnRadomPool(obj.transform.position);
         Return(obj);
     }
 

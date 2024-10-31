@@ -5,7 +5,7 @@ public abstract class PoolerBase<T> : MonoBehaviour where T : MonoBehaviour
 {
     [Header("Pooler Settings")]
     [SerializeField] protected T _prefab;
-    [SerializeField] private GameObject _holder;
+    [SerializeField] protected GameObject _holder;
     [Space(50)]
 
     protected List<T> _pool;

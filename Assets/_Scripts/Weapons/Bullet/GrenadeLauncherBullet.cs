@@ -45,6 +45,8 @@ public class GrenadeLauncherBullet : Bullet
         transform.position = sourceWeapon.transform.position;
         transform.rotation = sourceWeapon.transform.rotation;
 
+        _sourceWeapon = sourceWeapon;
+
         _animator.CrossFade(FlyAnimation, 0, 0);
     }
 
@@ -86,7 +88,7 @@ public class GrenadeLauncherBullet : Bullet
         _animator.CrossFade(ExplodeAnimation, 0, 0);
 
 
-        _dealer.DealOneShotDamage(_damage);
+        _dealer.DealOneShotDamage(_sourceWeapon.Damage);
 
         StartDespawnTimer();
     }

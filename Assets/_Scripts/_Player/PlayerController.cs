@@ -1,21 +1,28 @@
+using System;
+using System.Threading;
 using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
+using Utilities;
 
 public class PlayerController : UnitController
 {
-
-    #region COMPONENTS
+    #region Reference
+    [Header("Reference")]
     [SerializeField] private PlayerAnimator _playerAnimator;
-    [SerializeField] private PlayerMovement _playerMovement;
     [SerializeField] private PlayerDamageReceiver _playerDamageReceiver;
     [SerializeField] private WeaponController _weaponController;
     #endregion
+    [Header("Data")]
+    [SerializeField] private float _weaponExistDuration;
+    [SerializeField] private float _health;
     #region DATA
     private PlayerColor _playerColor;
 
     private Vector2 _moveInput;
     private Vector3 _mousePositon;
     private Vector2 _direction;
+
+    private CountdownTimer _weaponExistTimer;
     #endregion
     protected override void Awake()
     {
@@ -23,12 +30,17 @@ public class PlayerController : UnitController
         _playerColor = PlayerColor.White;
 
         _playerDamageReceiver.DeathAction += HandleDeath;
+
+        _weaponExistTimer = new CountdownTimer(_weaponExistDuration);
+        _weaponExistTimer.Stop();
     }
 
     protected override void Start()
     {
         base.Start();
         InputReader.Instance.ChangeWeaponAction += _weaponController.ChangeNextWeapon;
+
+        _playerDamageReceiver.SetMaxHP(_health);
     }
 
     protected override void Update()
@@ -45,11 +57,31 @@ public class PlayerController : UnitController
         _mousePositon = InputReader.Instance.AimPoint;
 
         FaceToDirection();
+
+        _weaponExistTimer.Tick(Time.deltaTime);
+
+        if (_weaponExistTimer.IsFinished)
+        {
+            _weaponExistTimer.Reset();
+            _weaponExistTimer.Stop();
+
+            ChangeWeapon(PlayerColor.White);
+        }
+
     }
 
     protected override void FixedUpdate()
     {
         Locomotion(_moveInput);
+    }
+
+    public void ChangeWeapon(PlayerColor color)
+    {
+        _playerColor = color;
+        _playerAnimator.Render(_playerColor);
+        _weaponController.ChangeWeapon(color);
+
+        _weaponExistTimer.Start();
     }
 
     private void FaceToDirection()
@@ -88,17 +120,8 @@ public class PlayerController : UnitController
     {
         Time.timeScale = 0;
     }
-
-    #region COLLISION
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.TryGetComponent(out ColorPool colorPool))
-        {
-            _playerColor = colorPool.PlayerColor;
-        }
-    }
-    #endregion
 }
+[Serializable]
 public enum PlayerColor
 {
     Red,

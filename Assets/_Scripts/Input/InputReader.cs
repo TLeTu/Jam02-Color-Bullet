@@ -10,6 +10,8 @@ public class InputReader : Singleton<InputReader>
     [SerializeField] private InputActionReference _fireAction;
     [SerializeField] private InputActionReference _changeWeaponsAction;
 
+    [SerializeField] private bool _lockChangeWeapon = false;
+
     public Vector2  Direction { get; private set; }
     public Vector2 AimPoint { get; private set; }
     public bool IsFiring { get; private set; }
@@ -32,7 +34,9 @@ public class InputReader : Singleton<InputReader>
         _moveAction.action.Enable();
         _aimAction.action.Enable();
         _fireAction.action.Enable();
-        _changeWeaponsAction.action.Enable();
+
+        if (!_lockChangeWeapon)
+            _changeWeaponsAction.action.Enable();
     }
 
     public void DeactiveInput()

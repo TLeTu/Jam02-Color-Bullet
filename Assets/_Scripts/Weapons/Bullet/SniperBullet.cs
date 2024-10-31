@@ -45,9 +45,9 @@ public class SniperBullet : Bullet
         transform.position = sourceWeapon.transform.position;
         transform.rotation = sourceWeapon.transform.rotation;
 
+        _sourceWeapon = sourceWeapon;
+
         _animator.CrossFade(FlyAnimation, 0, 0);
-
-
     }
 
     public void Firing(Vector2 aimPoint)
@@ -99,9 +99,9 @@ public class SniperBullet : Bullet
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.TryGetComponent(out DamageReceiver receiver))
+        if (collision.TryGetComponent(out EnemyDamageReceiver receiver))
         {
-            _dealer.DealOneShotDamage(_damage, receiver);
+            _dealer.DealOneShotDamage(_sourceWeapon.Damage, receiver);
         }
     }
 }

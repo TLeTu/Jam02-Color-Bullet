@@ -47,7 +47,7 @@ public class DefaultBullet : Bullet
 
         _animator.CrossFade(FlyAnimation, 0, 0);
 
-
+        _sourceWeapon = sourceWeapon;
     }
 
     public void Firing(Vector2 aimPoint)
@@ -99,9 +99,9 @@ public class DefaultBullet : Bullet
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.TryGetComponent(out DamageReceiver receiver))
+        if (collision.TryGetComponent(out EnemyDamageReceiver receiver))
         {
-            _dealer.DealOneShotDamage(_damage, receiver);
+            _dealer.DealOneShotDamage(_sourceWeapon.Damage, receiver);
             _isFlying = false;
             StartDespawnTimer();
         }

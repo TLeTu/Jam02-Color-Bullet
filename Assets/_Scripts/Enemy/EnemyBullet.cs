@@ -38,7 +38,7 @@ public class EnemyBullet : Bullet
 
         _animator.CrossFade(FlyAnimation, 0, 0);
 
-        _damage = sourceWeapon.Damage;
+        _sourceWeapon = sourceWeapon;
 
         _isFlying = false;
     }
@@ -70,9 +70,7 @@ public class EnemyBullet : Bullet
         {
             if (receiver is PlayerDamageReceiver)
             {
-                receiver.TakeDamage(_damage);
-
-                Debug.Log("Player Death");
+                receiver.TakeDamage(_sourceWeapon.Damage);
 
                 Despawn?.Invoke(this);
 

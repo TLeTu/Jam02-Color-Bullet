@@ -2,11 +2,12 @@ using System;
 using UnityEngine;
 using Utilities;
 
-public abstract class Bullet : MonoBehaviour
+public class Bullet : MonoBehaviour
 {
+    [SerializeField] protected Weapon _sourceWeapon;
+
     [Header("Bullet Base")]
     [SerializeField] protected float _despawnTime;
-    [SerializeField] protected float _damage;
     [SerializeField] protected float _flySpeed;
 
 
@@ -28,5 +29,8 @@ public abstract class Bullet : MonoBehaviour
         _despawnTimer.Start();
     }
 
-    public abstract void Initialize(Weapon sourceWeapon);
+    public virtual void Initialize(Weapon sourceWeapon)
+    {
+        _sourceWeapon = sourceWeapon;
+    }
 }

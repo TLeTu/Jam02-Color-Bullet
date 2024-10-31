@@ -13,8 +13,8 @@ public class DefaultBulletDmgDealer : DamageDealer
             {
                 receiver.TakeDamage(dmg);
                 _hasDealDamge.Add(receiver);
-                Knockback(receiver);
-                Debug.Log("Deal damage to " + receiver.name);
+                //Knockback(receiver);
+                //Debug.Log("Deal damage to " + receiver.name);
             }
 
     }
