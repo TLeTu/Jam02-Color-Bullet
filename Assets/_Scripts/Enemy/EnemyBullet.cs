@@ -68,8 +68,14 @@ public class EnemyBullet : Bullet
     {
         if (other.TryGetComponent(out DamageReceiver receiver))
         {
-            receiver.TakeDamage(_damage);
-            Despawn?.Invoke(this);
+            if (receiver is PlayerDamageReceiver)
+            {
+                receiver.TakeDamage(_damage);
+
+                Debug.Log("Player Death");
+
+                return;
+            }
         }
     }
 }
