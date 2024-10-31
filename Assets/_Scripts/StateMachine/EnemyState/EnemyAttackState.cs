@@ -10,4 +10,11 @@ public class EnemyAttackState : EnemyBaseState
     {
         enemy.Attacking();
     }
+
+    public override void Update()
+    {
+        if (enemy.OnCooldown) return;
+
+        enemy.Attacking();
+    }
 }

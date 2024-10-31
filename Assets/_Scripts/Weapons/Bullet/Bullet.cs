@@ -4,11 +4,16 @@ using Utilities;
 
 public abstract class Bullet : MonoBehaviour
 {
-    [SerializeField] private float _despawnTime;
+    [Header("Bullet Base")]
+    [SerializeField] protected float _despawnTime;
+    [SerializeField] protected float _damage;
+    [SerializeField] protected float _flySpeed;
+
 
     public Action<Bullet> Despawn;
 
     private CountdownTimer _despawnTimer;
+
 
     protected virtual void Update()
     {

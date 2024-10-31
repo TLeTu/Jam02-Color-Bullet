@@ -6,10 +6,7 @@ public class GrenadeLauncherBullet : Bullet
     [SerializeField] private Animator _animator;
     [SerializeField] private GrenadeLauncherBulletDmgDealer _dealer;
 
-    [SerializeField] private float _flySpeed = 1;
     [SerializeField] private AnimationCurve _animationCurve;
-
-    [SerializeField] private float _damage;
 
     private Vector2 _startPoint;
     private Vector2 _aimPoint;

@@ -5,12 +5,11 @@ using Utilities;
 public abstract class Weapon : PoolerBase<Bullet>
 {
     [SerializeField] protected float _fireRate = 1f; // 1 bullet per second
-
-
-    [SerializeField] private Bullet _bulletPrefab;
-    [SerializeField] private GameObject _bulletHolder;
+    [SerializeField] protected float _damage = 1f;
 
     protected CountdownTimer _fireTimer;
+
+    public float Damage => _damage;
 
     protected override void Awake()
     {

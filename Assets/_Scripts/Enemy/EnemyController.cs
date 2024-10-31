@@ -2,6 +2,8 @@ using UnityEngine;
 using StateMachineBehaviour;
 using Utilities;
 using System;
+using UnityEditor.Animations;
+using static UnityEngine.GraphicsBuffer;
 
 public class EnemyController : UnitController
 {
@@ -11,8 +13,11 @@ public class EnemyController : UnitController
     [SerializeField] private EnemyDamageReceiver _damageReceiver;
 
     [Header("Attack Setting")]
+    [SerializeField] private EnemyWeapon _weapon;
     [SerializeField] private float _attackRange;
+    [SerializeField] private float _attackDuration;
     [SerializeField] private float _attackCooldown;
+
 
     [Header("Target")]
     [SerializeField] private UnitController _target;
@@ -22,23 +27,26 @@ public class EnemyController : UnitController
 
     StateMachine _stateMachine;
 
+    CountdownTimer _durationTimer;
     CountdownTimer _cooldownTimer;
 
     public EnemyType Type => _type;
+    public bool OnCooldown => _cooldownTimer.IsRunning;
 
     protected override void Awake()
     {
         base.Awake();
 
-        _animator = GetComponent<Animator>();
-
-        if (_animator == null)
-        {
-            //add an animator component
-            _animator = gameObject.AddComponent<Animator>();
-        }
+        if (!TryGetComponent<Animator>(out _animator)) _animator = gameObject.AddComponent<Animator>();
+        else _animator = GetComponent<Animator>();
 
         _damageReceiver.DeathAction += () => DespawnAction?.Invoke(this);
+
+        _durationTimer = new CountdownTimer(0);
+        _durationTimer.Stop();
+
+        _cooldownTimer = new CountdownTimer(0);
+        _cooldownTimer.Stop();
     }
 
     protected override void Start()
@@ -47,16 +55,13 @@ public class EnemyController : UnitController
 
         _target = GameObject.FindGameObjectWithTag("Player").GetComponent<UnitController>();
 
-        _cooldownTimer = new CountdownTimer(_attackCooldown);
-        _cooldownTimer.Stop();
-
         _stateMachine = new StateMachine();
 
         EnemyBaseState chaseState = new EnemyChaseState(this, _animator);
         EnemyBaseState attackState = new EnemyAttackState(this, _animator);
 
         At(chaseState, attackState, new FuncPredicate(() => IsInRange()));
-        At(attackState, chaseState, new FuncPredicate(() => _cooldownTimer.IsFinished || !_cooldownTimer.IsRunning));
+        At(attackState, chaseState, new FuncPredicate(() => !IsInRange() && (_durationTimer.IsFinished || !_durationTimer.IsRunning)));
 
         _stateMachine.SetState(chaseState);
     }
@@ -68,6 +73,7 @@ public class EnemyController : UnitController
     {
         base.Update();
         _stateMachine.Update();
+        _durationTimer.Tick(Time.deltaTime);
         _cooldownTimer.Tick(Time.deltaTime);
     }
 
@@ -78,8 +84,37 @@ public class EnemyController : UnitController
 
     public void Initialize (EnemyType type, EnemySpawner spawner)
     {
+        _type = type;
 
+        AnimatorController controller = spawner.RandomLongRangeAnimator;
+        SetAnimatorController(controller);
+
+        float dmg;
+        float range;
+        float duration;
+        float cooldown;
+
+        if (type == EnemyType.CloseRange)
+        {
+            dmg = spawner.CloseRangeDamage;
+            range = spawner.CloseRangeAtkRange ;
+            duration = spawner.CloseRangeAtkDuration;
+            cooldown = spawner.CloseRangeAtkCooldown;
+        }
+        else
+        {
+            dmg = spawner.LongRangeDamage;
+            range = spawner.LongRangeAtkRange;
+            duration = spawner.LongRangeAtkDuration;
+            cooldown = spawner.LongRangeAtkCooldown;
+        }
+
+        _durationTimer.Reset(duration);
+        _cooldownTimer.Reset(cooldown);
+        _attackRange = range;
+        _weapon.SetupWeapon(dmg);
     }
+
     public void HandleMovement()
     {
         Vector2 direction = (_target.transform.position - transform.position).normalized;
@@ -94,34 +129,27 @@ public class EnemyController : UnitController
 
     public void Attacking()
     {
+        _durationTimer.Reset();
+        _durationTimer.Start();
+
         _cooldownTimer.Reset();
         _cooldownTimer.Start();
+
+        Debug.Log("Attack");
 
         switch(_type)
         {
             case EnemyType.CloseRange:
-                CloseRangeAttack();
+                _weapon.CloseRangeAttack(_target);
                 break;
             case EnemyType.LongRange:
-                LongRangeAttack();
+                _weapon.LongRangeAttack(_target);
                 break;
         }
     }
-
-    private void CloseRangeAttack()
+    public void SetAnimatorController(AnimatorController controller)
     {
-
-    }
-
-    private void LongRangeAttack()
-    {
-        //fire a projectile
-
-    }
-
-    public void SetAnimatorController(AnimatorControllerParameter controller)
-    {
-
+        _animator.runtimeAnimatorController = controller;
     }
 
     private void OnDrawGizmos()

@@ -5,7 +5,6 @@ using UnityEngine;
 public class ShotgunBullet : Bullet
 {
     [SerializeField] private ShotgunBulletDmgDealer _dealer;
-    [SerializeField] private float _damage;
     [SerializeField] private float offset;
 
     public override void Initialize(Weapon weapon)
