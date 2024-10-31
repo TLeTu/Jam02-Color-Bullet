@@ -11,7 +11,6 @@ public class PlayerDamageReceiver : DamageReceiver
         if (_currentHP <= 0)
         {
             DeathAction?.Invoke();
-            Time.timeScale = 0;
         }
     }
 }

@@ -7,6 +7,7 @@ public class PlayerController : UnitController
     #region COMPONENTS
     [SerializeField] private PlayerAnimator _playerAnimator;
     [SerializeField] private PlayerMovement _playerMovement;
+    [SerializeField] private PlayerDamageReceiver _playerDamageReceiver;
     [SerializeField] private WeaponController _weaponController;
     #endregion
     #region DATA
@@ -20,6 +21,8 @@ public class PlayerController : UnitController
     {
         base.Awake();
         _playerColor = PlayerColor.White;
+
+        _playerDamageReceiver.DeathAction += HandleDeath;
     }
 
     protected override void Start()
@@ -79,6 +82,11 @@ public class PlayerController : UnitController
     {
         UnlockForce();
         base.ResetForce();
+    }
+
+    public void HandleDeath()
+    {
+        Time.timeScale = 0;
     }
 
     #region COLLISION

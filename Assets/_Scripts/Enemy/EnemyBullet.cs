@@ -74,6 +74,8 @@ public class EnemyBullet : Bullet
 
                 Debug.Log("Player Death");
 
+                Despawn?.Invoke(this);
+
                 return;
             }
         }

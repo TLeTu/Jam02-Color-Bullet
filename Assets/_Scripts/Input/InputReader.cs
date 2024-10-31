@@ -19,13 +19,23 @@ public class InputReader : Singleton<InputReader>
 
     private void OnEnable()
     {
+        ActiveInput();
+    }
+
+    private void OnDisable()
+    {
+        DeactiveInput();
+    }
+
+    public void ActiveInput()
+    {
         _moveAction.action.Enable();
         _aimAction.action.Enable();
         _fireAction.action.Enable();
         _changeWeaponsAction.action.Enable();
     }
 
-    private void OnDisable()
+    public void DeactiveInput()
     {
         _moveAction.action.Disable();
         _aimAction.action.Disable();
