@@ -11,6 +11,7 @@ public class PlayerController : UnitController
     [SerializeField] private PlayerAnimator _playerAnimator;
     [SerializeField] private PlayerDamageReceiver _playerDamageReceiver;
     [SerializeField] private WeaponController _weaponController;
+    [SerializeField] private UIController _uiController;
     #endregion
     [Header("Data")]
     [SerializeField] private float _weaponExistDuration;
@@ -41,6 +42,7 @@ public class PlayerController : UnitController
         InputReader.Instance.ChangeWeaponAction += _weaponController.ChangeNextWeapon;
 
         _playerDamageReceiver.SetMaxHP(_health);
+        _uiController.SetMaxHealth((int)_health);
     }
 
     protected override void Update()
@@ -67,7 +69,6 @@ public class PlayerController : UnitController
 
             ChangeWeapon(PlayerColor.White);
         }
-
     }
 
     protected override void FixedUpdate()
