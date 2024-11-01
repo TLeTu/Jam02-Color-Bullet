@@ -26,4 +26,23 @@ public class UIController : MonoBehaviour
     {
         _ammo.value = ammo;
     }
+
+    public void SetAmmoColor(PlayerColor playerColor)
+    {
+        switch (playerColor)
+        {
+            case PlayerColor.White:
+                _ammo.fillRect.GetComponent<Image>().color = Color.white;
+                break;
+            case PlayerColor.Red:
+                _ammo.fillRect.GetComponent<Image>().color = Color.red;
+                break;
+            case PlayerColor.Orange:
+                _ammo.fillRect.GetComponent<Image>().color = new Color(1.0f, 0.5f, 0.0f);
+                break;
+            case PlayerColor.Purple:
+                _ammo.fillRect.GetComponent<Image>().color = new Color(0.5f, 0.0f, 1.0f);
+                break;
+        }
+    }
 }

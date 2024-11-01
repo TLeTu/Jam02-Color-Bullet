@@ -34,6 +34,7 @@ public class PlayerController : UnitController
 
         _weaponExistTimer = new CountdownTimer(_weaponExistDuration);
         _weaponExistTimer.Stop();
+        
     }
 
     protected override void Start()
@@ -43,6 +44,8 @@ public class PlayerController : UnitController
 
         _playerDamageReceiver.SetMaxHP(_health);
         _uiController.SetMaxHealth((int)_health);
+        _uiController.SetMaxAmmo(_weaponExistTimer.initialTime);
+        _uiController.SetAmmoColor(_playerColor);
     }
 
     protected override void Update()
@@ -61,7 +64,11 @@ public class PlayerController : UnitController
         FaceToDirection();
 
         _weaponExistTimer.Tick(Time.deltaTime);
-/*        _uiController.SetAmmo((float)_weaponExistTimer);*/
+        if (_playerColor != PlayerColor.White)
+        {
+            _uiController.SetAmmo(_weaponExistTimer.Time);
+         }
+        
 
         if (_weaponExistTimer.IsFinished)
         {
@@ -82,6 +89,8 @@ public class PlayerController : UnitController
         _playerColor = color;
         _playerAnimator.Render(_playerColor);
         _weaponController.ChangeWeapon(color);
+        _uiController.SetAmmo(_weaponExistTimer.initialTime);
+        _uiController.SetAmmoColor(color);
 
         _weaponExistTimer.Start();
     }
