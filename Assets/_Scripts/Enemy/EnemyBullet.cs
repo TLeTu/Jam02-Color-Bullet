@@ -66,16 +66,15 @@ public class EnemyBullet : Bullet
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.TryGetComponent(out DamageReceiver receiver))
+        if (other.TryGetComponent(out PlayerDamageReceiver receiver))
         {
-            if (receiver is PlayerDamageReceiver)
-            {
-                receiver.TakeDamage(_sourceWeapon.Damage);
+            if (receiver.IsUnvanurable) return;
 
-                Despawn?.Invoke(this);
+            receiver.TakeDamage(_sourceWeapon.Damage);
 
-                return;
-            }
+            Despawn?.Invoke(this);
+
+            return;
         }
     }
 }

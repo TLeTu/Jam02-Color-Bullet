@@ -140,7 +140,7 @@ public class EnemyController : UnitController
         switch(_type)
         {
             case EnemyType.CloseRange:
-                _weapon.CloseRangeAttack(_target);
+                _weapon.CloseRangeAttack(_attackRange);
                 break;
             case EnemyType.LongRange:
                 _weapon.LongRangeAttack(_target);
@@ -151,11 +151,4 @@ public class EnemyController : UnitController
     {
         _animator.runtimeAnimatorController = controller;
     }
-
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, _attackRange);
-    }
-
 }

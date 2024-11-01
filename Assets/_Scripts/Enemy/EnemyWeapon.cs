@@ -5,13 +5,16 @@ using static UnityEngine.GraphicsBuffer;
 
 public class EnemyWeapon : Weapon
 {
+    [SerializeField] private EnemyCloseRangeDamageDealer _closeRangeDamageDealer;
+
     public void SetupWeapon(float attackDamage)
     {
         _damage = attackDamage;
     }
 
-    public void CloseRangeAttack(UnitController target)
+    public void CloseRangeAttack(float range)
     {
+        _closeRangeDamageDealer.DealOneShotDamage(_damage, range);
 
     }
 

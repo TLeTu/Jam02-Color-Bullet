@@ -8,6 +8,8 @@ public class GrenadeLauncherBullet : Bullet
 
     [SerializeField] private AnimationCurve _animationCurve;
 
+    [SerializeField] private AudioClip _explodeSound;
+
     private Vector2 _startPoint;
     private Vector2 _aimPoint;
     private bool _isFlying;
@@ -87,6 +89,7 @@ public class GrenadeLauncherBullet : Bullet
     {
         _animator.CrossFade(ExplodeAnimation, 0, 0);
 
+        AudioManager.Instance.PlaySound(_explodeSound, transform.position);
 
         _dealer.DealOneShotDamage(_sourceWeapon.Damage);
 

@@ -11,8 +11,10 @@ public class EnemySpawner : PoolerBase<EnemyController>
     [SerializeField] private ColorPoolSpawner _colorPoolSpawner;
 
     [Header("Spawner Settings")]
-    [SerializeField] private Transform topleftLimit;
-    [SerializeField] private Transform bottomdownLimit;
+    [SerializeField] private Transform topleftMaxLimit;
+    [SerializeField] private Transform topleftMinLimit;
+    [SerializeField] private Transform bottomrightMaxLimit;
+    [SerializeField] private Transform bottomrightMinLimit;
 
     [SerializeField] private float _waveCooldown = 1f;
     [SerializeField][UnityEngine.Range(5,100)] private int _waveSize = 5;
@@ -100,23 +102,61 @@ public class EnemySpawner : PoolerBase<EnemyController>
         }
 
         _waveIndex++;
+        //first 3 wave will only spawn close range enemy
+        //next 5 wave will spawn both close range and long range enemy, but more close range enemy and increase the amount of long range enemy each wave
+        // the rest will spawn both close range and long range enemy with equal amount
+        int closeRangeCount = 0;
+        int longRangeCount = 0;
 
-        for (int i = 0; i < _waveSize; i++)
+        if (_waveIndex <= 3)
+        {
+            closeRangeCount = _waveSize;
+        }
+        else if (_waveIndex <= 8)
+        {
+            closeRangeCount = _waveSize - (_waveIndex - 3);
+            longRangeCount = _waveIndex - 3;
+        }
+        else
+        {
+            closeRangeCount = _waveSize / 2;
+            longRangeCount = _waveSize / 2;
+        }
+
+        for (int i = 0; i < closeRangeCount; i++)
         {
             var enemy = Get();
-
-            // Randomize the position of the enemy within the spawn range
-
-            Vector2 spawnPos = new Vector2(
-                UnityEngine.Random.Range(topleftLimit.position.x, bottomdownLimit.position.x), 
-                UnityEngine.Random.Range(topleftLimit.position.y, bottomdownLimit.position.y));
-
-
-            enemy.transform.position = spawnPos;
-
-            enemy.Initialize(EnemyType.LongRange, this);
-
+            enemy.transform.position = GetRandomPosition();
+            enemy.Initialize(EnemyType.CloseRange, this);
             enemy.gameObject.SetActive(true);
         }
+
+        for (int i = 0; i < longRangeCount; i++)
+        {
+            var enemy = Get();
+            enemy.transform.position = GetRandomPosition();
+            enemy.Initialize(EnemyType.LongRange, this);
+            enemy.gameObject.SetActive(true);
+        }
+    }
+
+    private Vector3 GetRandomPosition()
+    {
+        Vector2 randomPos;
+
+        while (true)
+        {
+            float x = UnityEngine.Random.Range(topleftMaxLimit.position.x, bottomrightMaxLimit.position.x);
+            float y = UnityEngine.Random.Range(topleftMaxLimit.position.y, bottomrightMaxLimit.position.y);
+            randomPos = new Vector2(x, y);
+
+            if (randomPos.x < topleftMinLimit.position.x || randomPos.x > bottomrightMinLimit.position.x ||
+                randomPos.y > topleftMinLimit.position.y || randomPos.y < bottomrightMinLimit.position.y)
+            {
+                break; 
+            }
+        }
+
+        return randomPos;
     }
 }

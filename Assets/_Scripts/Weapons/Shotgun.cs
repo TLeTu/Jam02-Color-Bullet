@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class Shotgun : Weapon
 {
+    [SerializeField] AudioClip _fire;
+
     [SerializeField] private float _knockbackForce;
 
     public override void Fire(Vector2 aimPoint, UnitController source = null)
@@ -15,6 +17,7 @@ public class Shotgun : Weapon
         bullet.Initialize(this);
 
         bullet.Firing(direction);
+        AudioManager.Instance.PlaySound(_fire, transform.position);
 
         if (source != null)
         {
