@@ -61,6 +61,7 @@ public class PlayerController : UnitController
         FaceToDirection();
 
         _weaponExistTimer.Tick(Time.deltaTime);
+/*        _uiController.SetAmmo((float)_weaponExistTimer);*/
 
         if (_weaponExistTimer.IsFinished)
         {
