@@ -11,6 +11,11 @@ namespace Utilities {
         public Action OnTimerStart = delegate { };
         public Action OnTimerStop = delegate { };
 
+        public void SetToProgress(float propress)
+        {
+            Time = initialTime * propress;
+        }
+
         protected Timer(float value) {
             initialTime = value;
             IsRunning = false;

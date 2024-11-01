@@ -95,6 +95,7 @@ public class EnemyController : UnitController
         float range;
         float duration;
         float cooldown;
+        float speed;
 
         if (type == EnemyType.CloseRange)
         {
@@ -102,6 +103,7 @@ public class EnemyController : UnitController
             range = spawner.CloseRangeAtkRange ;
             duration = spawner.CloseRangeAtkDuration;
             cooldown = spawner.CloseRangeAtkCooldown;
+            speed = spawner.CloseRangeSpeed;
         }
         else
         {
@@ -109,12 +111,15 @@ public class EnemyController : UnitController
             range = spawner.LongRangeAtkRange;
             duration = spawner.LongRangeAtkDuration;
             cooldown = spawner.LongRangeAtkCooldown;
+            speed = spawner.LongRangeSpeed;
         }
 
         _durationTimer.Reset(duration);
         _cooldownTimer.Reset(cooldown);
         _attackRange = range;
         _weapon.SetupWeapon(dmg);
+
+        ChangeRunMaxSpeed(speed);
     }
 
     public void HandleMovement()

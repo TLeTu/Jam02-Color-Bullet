@@ -15,8 +15,17 @@ public class UnitController : MonoBehaviour
     [SerializeField] private float _runDeccelAmount = 50f;
 
     private CountdownTimer _forceTimer;
+    private CountdownTimer _lockTimer;
 
     protected bool _lockForce;
+
+    protected bool _lockMotion;
+
+    public void ChangeRunMaxSpeed(float speed)
+    {
+        _runMaxSpeed = speed;
+
+    }
 
     protected virtual void Awake()
     {
@@ -36,7 +45,12 @@ public class UnitController : MonoBehaviour
         _forceTimer.OnTimerStop += ResetForce;
         _forceTimer.Stop();
 
+        _lockTimer = new CountdownTimer(1);
+        _lockTimer.Start();
+        _lockTimer.Stop();
+
         _lockForce = false;
+        _lockMotion = false;
     }
 
     protected virtual void Update()
@@ -47,10 +61,26 @@ public class UnitController : MonoBehaviour
         }
 
         _forceTimer.Tick(Time.deltaTime);
+        _lockTimer.Tick(Time.deltaTime);
+
+        if (_lockTimer.IsFinished)
+        {
+            _lockMotion = false;
+            _lockTimer.Reset();
+            _lockTimer.Stop();
+        }
+
     }
 
     protected virtual void FixedUpdate()
     {
+    }
+
+    public virtual void LockMotion(float time)
+    {
+        _lockTimer.Reset(time);
+        _lockTimer.Start();
+        _lockMotion = true;
     }
 
 
@@ -90,6 +120,7 @@ public class UnitController : MonoBehaviour
     protected void Locomotion(Vector2 movement)
     {
         if (_lockForce) return;
+        if (_lockMotion) return;
 
         #region NO TOUCHING
         float targetSpeedX = movement.x * _runMaxSpeed;

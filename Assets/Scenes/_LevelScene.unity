@@ -339,7 +339,7 @@ Animator:
   m_GameObject: {fileID: 401897832}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: f63af14da76520040abb139618111a94, type: 2}
+  m_Controller: {fileID: 9100000, guid: f420cec7e035922419a36b9c1b92a7b8, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -461,7 +461,7 @@ MonoBehaviour:
   _prefab: {fileID: 401897834}
   _holder: {fileID: 1560131171}
   _collisionRadius: 1
-  _existTime: 2
+  _existTime: 5
   _poolDatas:
   - playerColor: 0
     animator: {fileID: 9100000, guid: f420cec7e035922419a36b9c1b92a7b8, type: 2}
@@ -1713,7 +1713,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _prefab: {fileID: 9026000931045674223}
   _holder: {fileID: 1364418033}
-  _fireRate: 3
+  _fireRate: 2
   _damage: 1
   _fire: {fileID: 8300000, guid: 500f8f8f540f65545aa51f7ed3f87627, type: 3}
 --- !u!212 &3742247022266258910
@@ -2030,9 +2030,9 @@ MonoBehaviour:
   _prefab: {fileID: 4612413535354297176}
   _holder: {fileID: 1364418033}
   _fireRate: 1
-  _damage: 1
+  _damage: 2
   _fire: {fileID: 8300000, guid: 49b8932082af8cc49b5ff9557b371604, type: 3}
-  _specificLockForceTime: 1
+  _specificLockForceTime: 0.5
 --- !u!1 &5163450951619557230
 GameObject:
   m_ObjectHideFlags: 0
@@ -2531,7 +2531,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _sourceWeapon: {fileID: 0}
   _despawnTime: 5
-  _flySpeed: 10
+  _flySpeed: 8
   _animator: {fileID: 6503195145454094040}
   _dealer: {fileID: 7263622918038927590}
 --- !u!1 &6200054937229271272
@@ -2599,8 +2599,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _prefab: {fileID: 9152440401923701369}
   _holder: {fileID: 1364418033}
-  _fireRate: 5
-  _damage: 1
+  _fireRate: 0.5
+  _damage: 2
   _fire: {fileID: 8300000, guid: 11ad35751e1fa2f4b8c68da16f9695e3, type: 3}
 --- !u!61 &6363846800838678268
 BoxCollider2D:
@@ -2759,7 +2759,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7761631683644449501}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c63403f654efd404a86045ef34eb284b, type: 3}
   m_Name: 
@@ -2771,21 +2771,21 @@ MonoBehaviour:
   topleftMinLimit: {fileID: 558204939}
   bottomrightMaxLimit: {fileID: 2034379072545384612}
   bottomrightMinLimit: {fileID: 463007365}
-  _waveCooldown: 1
+  _waveCooldown: 7
   _waveSize: 5
-  _waveCount: 1
-  _closeRangeSpeed: 2
+  _waveCount: 100
+  _closeRangeSpeed: 3
   _closeRangeDamage: 2
   _closeRangeAtkRange: 1
   _closeRangeAtkDuration: 0.5
   _closeRangeAtkCooldown: 2
-  _closeRangeHealth: 1
-  _longRangeSpeed: 2
+  _closeRangeHealth: 2
+  _longRangeSpeed: 5
   _longRangeDamage: 2
-  _longRangeAtkRange: 5
+  _longRangeAtkRange: 8
   _longRangeAtkDuration: 1
-  _longRangeAtkCooldown: 2
-  _longRangeHealth: 3
+  _longRangeAtkCooldown: 1
+  _longRangeHealth: 1
   _closeRangeAnimator: []
   _longRangeAnimator:
   - {fileID: 9100000, guid: 451a98b29f6d6374e869eeb8e9ce414a, type: 2}
@@ -2836,7 +2836,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _prefab: {fileID: 4796656882076646903}
   _holder: {fileID: 1364418033}
-  _fireRate: 2
+  _fireRate: 1
   _damage: 1
   _fire: {fileID: 8300000, guid: 861bc0a6b722e0247a3df3f008321c48, type: 3}
   _knockbackForce: 10
@@ -3204,7 +3204,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _rb: {fileID: 7687278634183434073}
   _forceTime: 0.2
-  _runMaxSpeed: 5
+  _runMaxSpeed: 4
   _runAccelAmount: 50
   _runDeccelAmount: 50
   _playerAnimator: {fileID: 5386943829382912881}

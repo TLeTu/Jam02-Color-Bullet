@@ -86,6 +86,8 @@ public class PlayerController : UnitController
 
     private void FaceToDirection()
     {
+        if (_lockMotion) return;
+
         _direction = (_mousePositon - transform.position).normalized;
         if (_direction.x > 0)
         {

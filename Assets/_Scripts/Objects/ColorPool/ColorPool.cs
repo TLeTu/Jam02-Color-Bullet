@@ -40,13 +40,18 @@ public class ColorPool : MonoBehaviour
     {
         _existTimer.Tick(Time.deltaTime);
 
-        Debug.Log(_existTimer.Progress);
-
         if (_existTimer.IsFinished)
         {
+            _spriteRenderer.color = Color.white;
             DespawnAction?.Invoke(this);
             _existTimer.Stop();
         }
+
+        if(_existTimer.IsRunning && _existTimer.Progress <= 0.2f)
+        {
+            _spriteRenderer.color = new Color(1, 1, 1, Mathf.PingPong(Time.time * 10, 1));
+        }
+
     }
 
     private void SetupDefault()
@@ -95,5 +100,7 @@ public class ColorPool : MonoBehaviour
             player.ChangeWeapon(_playerColor);
             _isUsing = true;
         }
+
+        _existTimer.SetToProgress(0.2f);
     }
 }
