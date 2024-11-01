@@ -90,7 +90,7 @@ public class EnemySpawner : PoolerBase<EnemyController>
 
     private void Despawn(EnemyController obj)
     {
-        _colorPoolSpawner.SpawnRadomPool(obj.transform.position);
+        _colorPoolSpawner.SpawnColorPool(obj.transform.position, obj.Color);
         Return(obj);
     }
 

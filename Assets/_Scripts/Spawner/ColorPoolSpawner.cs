@@ -28,6 +28,23 @@ public class ColorPoolSpawner : PoolerBase<ColorPool>
         return null;
     }
 
+    public void SpawnColorPool(Vector3 position, string color)
+    {
+        //check if the color is in the list
+        foreach (var data in _poolDatas)
+        {
+            if (data.playerColor.ToString() == color)
+            {
+                SpawnColorPool(position, data.playerColor);
+                return;
+            }
+        }
+
+        //Debug.LogError("Color not found in the list");
+
+        SpawnRadomPool(position);
+    }
+
     public void SpawnColorPool(Vector3 position, PlayerColor playerColor)
     {
         var colorPool = Get();

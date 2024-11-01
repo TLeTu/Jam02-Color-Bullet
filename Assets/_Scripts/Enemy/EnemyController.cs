@@ -22,6 +22,7 @@ public class EnemyController : UnitController
     [Header("Target")]
     [SerializeField] private UnitController _target;
 
+    public string Color => _animator.runtimeAnimatorController.name;
     public Action<EnemyController> DespawnAction { get; set; }
 
 
